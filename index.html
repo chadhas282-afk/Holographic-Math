@@ -638,3 +638,13 @@
           <button class="chip" data-eq="d/dt = [-y-z, x+0.2*y, 0.2+z*(x-5.7)]">Rössler</button>
           <button class="chip"
             data-eq="d/dt = [sin(y)-0.208186*x, sin(z)-0.208186*y, sin(x)-0.208186*z]">Thomas</button>
+          <button class="chip"
+            data-eq="d/dt = [15.6*(y-0.286*x+0.2145*(abs(x+1)-abs(x-1))), x-y+z, -28*y]">Chua</button>
+          <button class="chip" data-eq="fourier square">Fourier sq.</button>
+        </div>
+        <div class="eqhint" id="eqHint">surfaces z=f(x,y) · curves y=f(x) · [X(u,v),Y,Z] · implicit f(x,y,z)=0 · polar
+          r=f(θ) · add t to animate</div>
+        <div class="eqrow" id="eqrow2" style="margin-top:6px;">
+          <span class="label" style="flex-basis:46px;">2nd eq</span>
+          <input id="eq2" type="text" spellcheck="false" autocomplete="off" disabled value="z = x*x/4 - y*y/4"
+            placeholder="second equation" />
