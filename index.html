@@ -628,3 +628,13 @@
             <option value="fourier triangle">Fourier: triangle wave (live)</option>
           </select>
         </div>
+        <div class="chips" id="eqChips">
+          <button class="chip" data-eq="z = x*x/4 - y*y/4">saddle</button>
+          <button class="chip" data-eq="z = cos(sqrt(x*x + y*y))">ripples</button>
+          <button class="chip" data-eq="z = sin(x + t)*cos(y)">wave t</button>
+          <button class="chip" data-eq="[ (2+cos(v))*cos(u), (2+cos(v))*sin(u), sin(v) ]">torus</button>
+          <button class="chip" data-eq="x^2 + y^2 + z^2 - 4 = 0">sphere</button>
+          <button class="chip" data-eq="d/dt = [10*(y-x), x*(28-z)-y, x*y-8/3*z]">Lorenz</button>
+          <button class="chip" data-eq="d/dt = [-y-z, x+0.2*y, 0.2+z*(x-5.7)]">Rössler</button>
+          <button class="chip"
+            data-eq="d/dt = [sin(y)-0.208186*x, sin(z)-0.208186*y, sin(x)-0.208186*z]">Thomas</button>
