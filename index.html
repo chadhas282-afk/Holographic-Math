@@ -828,3 +828,13 @@
       <ul>
         <li><code>z = f(x,y)</code> — surface · <code>y = f(x)</code> — 2D graph · <code>r = f(θ)</code> — polar</li>
         <li><code>[X(u,v), Y(u,v), Z(u,v)]</code> — parametric</li>
+        <li><code>f(x,y,z) = 0</code> — implicit surface (e.g. <code>x^2+y^2+z^2-4 = 0</code>)</li>
+        <li><code>d/dt = [fx, fy, fz]</code> or <code>dx/dt = fx, dy/dt = fy, dz/dt = fz</code> — ODE trajectory</li>
+        <li><code>slice4d F(x,y,z,w) = 0; w=0.5</code> — a 3D slice of a 4D surface</li>
+        <li><code>complex re, im, outRe, outIm; w=0</code> — 2D flow field in the plane z = w</li>
+        <li>Separate several equations with <code>;</code> to cycle through them</li>
+        <li>Include a standalone <code>t</code> to animate over time</li>
+        <li>Use <code>a b c k</code> with the param sliders to explore a whole family</li>
+        <li>Paste a second equation into <b>2nd eq</b> to render two shapes at once</li>
+        <li><code>fourier square</code> / <code>sawtooth</code> / <code>triangle</code> — a real partial-sum synthesis
+          that keeps adding harmonics and resets; add a term count (<code>fourier square 6</code>) to freeze it</li>
