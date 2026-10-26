@@ -888,3 +888,13 @@
     function padPalStops(stops) {
       const out = stops.slice(0, PAL_STOPS_MAX).map(v => v.clone());
       const last = out[out.length - 1] || new THREE.Vector3(1, 1, 1);
+      while (out.length < PAL_STOPS_MAX) out.push(last.clone());
+      return out;
+    }
+
+    const panelBody = $('panelBody'), collapseBtn = $('collapseBtn');
+    const shapeBtns = document.querySelectorAll('#shapeButtons .btn');
+    const shapeLabel = $('shapeLabel');
+    const eqInput = $('eq'), eqGo = $('eqGo'), eqChips = $('eqChips'), eqGallery = $('eqGallery'), eqHint = $('eqHint');
+    const paletteSel = $('palette');
+    const countSlider = $('countSlider'), countVal = $('countVal');
