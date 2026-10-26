@@ -878,3 +878,13 @@
     import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
     import { AfterimagePass } from 'three/addons/postprocessing/AfterimagePass.js';
     import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+    import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+    import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+
+    const CONFIG = { COUNT: 100000, DURATION: 2.2, AUTO_SPIN: 0.05, POINT_SIZE: 0.05, BRIGHTNESS: 0.95, STARS: 1500, A: 1, B: 1, C: 1, K: 1 };
+    const $ = (id) => document.getElementById(id);
+    const PAL_STOPS_MAX = 8;
+    function padPalStops(stops) {
+      const out = stops.slice(0, PAL_STOPS_MAX).map(v => v.clone());
+      const last = out[out.length - 1] || new THREE.Vector3(1, 1, 1);
