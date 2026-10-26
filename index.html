@@ -1038,3 +1038,13 @@
         if (c === '[' || c === '(') depth++;
         else if (c === ']' || c === ')') depth--;
         else if (c === '=' && depth === 0) return i;
+        }
+      return -1;
+    }
+
+    function parseOdeExpr(expr) {
+      const s = expr.trim();
+      const m = s.match(/^d\s*\/\s*dt\s*=\s*\[(.+)\]$/i) || s.match(/^d\s*\/\s*dt\s*=\s*(.+)$/i);
+      if (m) {
+        const parts = splitTop(m[1].trim());
+        return parts.length === 3 ? { fx: parts[0], fy: parts[1], fz: parts[2] } : null;
