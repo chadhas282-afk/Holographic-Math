@@ -958,3 +958,14 @@
       while (s.startsWith('(') && s.endsWith(')') && wrap++ < 8) {
         const inner = s.slice(1, -1);
         let d = 0, ok = true;
+        for (const ch of inner) {
+          if (ch === '(') d++;
+          else if (ch === ')') { d--; if (d < 0) { ok = false; break; } }
+        }
+        if (ok && d === 0) s = inner; else break;
+      }
+      let guard = 0;
+      while (s.endsWith(')') && guard++ < 8) {
+        const pre = s.slice(0, -1);
+        let open = 0, close = 0;
+        for (const ch of pre) { if (ch === '(') open++; else if (ch === ')') close++; }
