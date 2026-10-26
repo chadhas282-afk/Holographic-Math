@@ -998,3 +998,13 @@
     function tokenRe(ch) {
       return new RegExp('(?<![A-Za-z0-9_.])' + ch + '(?![A-Za-z0-9_.])', 'g');
     }
+
+    function applyParams(src, aCode, bCode, cCode, kCode) {
+      if (aCode) src = src.replace(tokenRe('a'), aCode);
+      if (bCode) src = src.replace(tokenRe('b'), bCode);
+      if (cCode) src = src.replace(tokenRe('c'), cCode);
+      if (kCode) src = src.replace(tokenRe('k'), kCode);
+      return src;
+    }
+
+    function cachedMake(code, aCode, bCode, cCode, kCode) {
