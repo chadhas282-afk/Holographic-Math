@@ -1048,3 +1048,12 @@
       if (m) {
         const parts = splitTop(m[1].trim());
         return parts.length === 3 ? { fx: parts[0], fy: parts[1], fz: parts[2] } : null;
+        }
+      const parts = splitTop(s);
+      if (parts.length >= 2 && parts.length <= 3 && parts.every(p => /^d[xyz]\s*\/\s*dt\s*=/i.test(p))) {
+        const o = { x: '0', y: '0', z: '0' };
+        parts.forEach(p => { const mm = p.match(/^d([xyz])\s*\/\s*dt\s*=\s*(.+)$/i); o[mm[1].toLowerCase()] = mm[2]; });
+        return { fx: o.x, fy: o.y, fz: o.z };
+      }
+      return null;
+    }
