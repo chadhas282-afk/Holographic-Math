@@ -1008,3 +1008,12 @@
     }
 
     function cachedMake(code, aCode, bCode, cCode, kCode) {
+      const key = (aCode || '') + '|' + (bCode || '') + '|' + (cCode || '') + '|' + (kCode || '') + '|' + code;
+      let f = FN_CACHE.get(key);
+      if (!f) {
+        f = makeMathFn(applyParams(code, aCode || '', bCode || '', cCode || '', kCode || ''));
+        FN_CACHE.set(key, f);
+        if (FN_CACHE.size > 512) FN_CACHE.clear();
+      }
+      return f;
+    }
