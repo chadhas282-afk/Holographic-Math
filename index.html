@@ -969,3 +969,12 @@
         const pre = s.slice(0, -1);
         let open = 0, close = 0;
         for (const ch of pre) { if (ch === '(') open++; else if (ch === ')') close++; }
+        if (open === close) s = pre; else break;
+      }
+      return s;
+    }
+
+    function h2(a, b) {
+      const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453123;
+      return s - Math.floor(s);
+    }
