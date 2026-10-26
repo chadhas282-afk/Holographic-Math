@@ -1057,3 +1057,14 @@
       }
       return null;
     }
+
+    function parseFourierExpr(expr) {
+      const m = expr.trim().match(/^fourier\s+(square|sawtooth|triangle)(?:\s+(\d+))?\s*$/i);
+      if (!m) return null;
+      return { waveform: m[1].toLowerCase(), fixedN: m[2] ? parseInt(m[2], 10) : null };
+    }
+    function fourierPartialSum(waveform, x, nTerms) {
+      let y = 0;
+      if (waveform === 'square') {
+        for (let idx = 0, kk = 1; idx < nTerms; idx++, kk += 2) y += (4 / (Math.PI * kk)) * Math.sin(kk * x);
+      } else if (waveform === 'sawtooth') {
