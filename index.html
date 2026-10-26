@@ -948,3 +948,13 @@
         .replace(/\u00f7/g, '/')
         .replace(/π(?=[a-zA-Z_θ(])/g, 'pi*').replace(/π/g, 'pi')
         .replace(/τ(?=[a-zA-Z_θ(])/g, 'T*').replace(/τ/g, 'T')
+        .replace(/(?<![A-Za-z_\d.])(\d+\.?\d*)([a-zA-Zθ_(])/g, '$1*$2')
+        .replace(/\)([a-zA-Zθ_(])/g, ')*$1');
+      const KN = ['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'atan2', 'sqrt', 'pow', 'exp', 'log', 'abs', 'min', 'max',
+        'floor', 'ceil', 'round', 'sign', 'pi', 'dt', 'dx', 'dy', 'dz', 'complex', 'Infinity'];
+      s = s.replace(/[a-zA-Z_]{2,}/g, (m, off, str) =>
+        (KN.indexOf(m) >= 0 || (m === 'slice' && str[off + m.length] === '4')) ? m : m.split('').join('*'));
+      let wrap = 0;
+      while (s.startsWith('(') && s.endsWith(')') && wrap++ < 8) {
+        const inner = s.slice(1, -1);
+        let d = 0, ok = true;
