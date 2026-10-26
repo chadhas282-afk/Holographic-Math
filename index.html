@@ -978,3 +978,13 @@
       const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453123;
       return s - Math.floor(s);
     }
+
+    function hasToken(str, ch) {
+      const esc = ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return new RegExp('(?<![A-Za-z0-9_.])' + esc + '(?![A-Za-z0-9_.])').test(str);
+    }
+
+    function makeMathFn(src) {
+      src = src.replace(/\^/g, '**');
+      src = src.replace(/(^|[(,*\/+\-=])\s*-\s*(?=(?:[A-Za-z_][\w.]*\s*\([^()]*\)|[\w.]+|\([^()]*\))\s*\*\*)/g, '$1 -1*');
+      const pro =
