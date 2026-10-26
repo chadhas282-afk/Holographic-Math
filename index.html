@@ -1017,3 +1017,14 @@
       }
       return f;
     }
+
+    function splitTop(str) {
+      const parts = [];
+      let depth = 0, cur = '';
+      for (const ch of str) {
+        if (ch === '[' || ch === '(') depth++;
+        else if (ch === ']' || ch === ')') depth--;
+        if (ch === ',' && depth === 0) { parts.push(cur.trim()); cur = ''; }
+        else cur += ch;
+      }
+      parts.push(cur.trim());
