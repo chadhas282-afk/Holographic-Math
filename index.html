@@ -988,3 +988,13 @@
       src = src.replace(/\^/g, '**');
       src = src.replace(/(^|[(,*\/+\-=])\s*-\s*(?=(?:[A-Za-z_][\w.]*\s*\([^()]*\)|[\w.]+|\([^()]*\))\s*\*\*)/g, '$1 -1*');
       const pro =
+      'const M=Math,pi=M.PI,T=2*M.PI,e=M.E,' +
+        'sin=M.sin,cos=M.cos,tan=M.tan,asin=M.asin,acos=M.acos,atan=M.atan,atan2=M.atan2,' +
+        'sqrt=M.sqrt,pow=M.pow,exp=M.exp,log=M.log,abs=M.abs,min=M.min,max=M.max,' +
+        'floor=M.floor,ceil=M.ceil,round=M.round,sign=M.sign;';
+      return Function('x', 'y', 'z', 'u', 'v', 't', pro + ';return (' + src + ');');
+    }
+
+    function tokenRe(ch) {
+      return new RegExp('(?<![A-Za-z0-9_.])' + ch + '(?![A-Za-z0-9_.])', 'g');
+    }
