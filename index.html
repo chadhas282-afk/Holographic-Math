@@ -938,3 +938,13 @@
         .replace(/\\sqrt\s*\{([^}]+)\}/g, 'sqrt($1)')
         .replace(/\\cdot/g, '*').replace(/\\times/g, '*').replace(/\\div/g, '/')
         .replace(/\\theta/g, 'θ').replace(/\\pi/g, 'pi').replace(/\\tau/g, 'T')
+        .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, (m, off, str) => {
+          const nxt = str[off + m.length];
+          const needStar = /[A-Za-z_0-9(]/.test(nxt || '');
+          return '^' + m.split('').map(c => SUP_MAP[c]).join('') + (needStar ? '*' : '');
+        })
+        .replace(/\u2212/g, '-')
+        .replace(/[\u00b7\u00d7\u22c5\u2219]/g, '*')
+        .replace(/\u00f7/g, '/')
+        .replace(/π(?=[a-zA-Z_θ(])/g, 'pi*').replace(/π/g, 'pi')
+        .replace(/τ(?=[a-zA-Z_θ(])/g, 'T*').replace(/τ/g, 'T')
