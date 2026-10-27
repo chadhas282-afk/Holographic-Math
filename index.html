@@ -1308,3 +1308,13 @@
       a = (a == null) ? 1 : a; b = (b == null) ? 1 : b; c = (c == null) ? 1 : c; k = (k == null) ? 1 : k;
       if (!count) count = 100000;
       const aCode = '(' + a.toFixed(4) + ')', bCode = '(' + b.toFixed(4) + ')';
+      const cCode = '(' + c.toFixed(4) + ')', kCode = '(' + k.toFixed(4) + ')';
+      const mk = (code) => cachedMake(code, aCode, bCode, cCode, kCode);
+
+      const fn0 = trimmed.match(/^f\s*\([^)]*\)\s*=\s*(.*)$/);
+      if (fn0) return buildFromEquation(fn0[1], count, t, a, b, c, k);
+
+      const fourier = parseFourierExpr(trimmed);
+      if (fourier) {
+        const nTerms = fourier.fixedN || (1 + Math.floor((t * 0.6) % 14));
+        return autofit(stratifiedN(count, (u, layer) => {
