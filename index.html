@@ -1238,3 +1238,13 @@
           edgeRoot(x0, y0, x0 + cell, y0, a, b);
           edgeRoot(x0 + cell, y0, x0 + cell, y0 + cell, b, c);
           edgeRoot(x0 + cell, y0 + cell, x0, y0 + cell, c, d);
+          edgeRoot(x0, y0 + cell, x0, y0, d, a);
+          if (pts.length > n0) hot.push([x0, y0]);
+        }
+      }
+      const SUB = 6, hx = cell / SUB, hy = cell / SUB;
+      for (let k = 0; k < hot.length; k++) {
+        const px = hot[k][0], py = hot[k][1];
+        for (let j = 0; j < SUB; j++) {
+          const yy = py + j * hy;
+          let fx = fn(px, yy, 0, 0, 0, t);
