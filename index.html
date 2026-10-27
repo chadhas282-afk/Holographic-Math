@@ -1128,3 +1128,13 @@
     function stratifiedN(count, cb) {
       const pos = new Float32Array(count * 3);
       const S = Math.ceil(Math.sqrt(count));
+      let idx = 0;
+      outer:
+      for (let i = 0; i < S; i++) {
+        for (let j = 0; j < S; j++) {
+          if (idx >= count) break outer;
+          const u = (i + h2(i * 7.3, j * 13.7)) / S;
+          const v = (j + h2(i * 91.7, j * 31.9)) / S;
+          const p = cb(u, v);
+          pos[idx * 3] = p[0]; pos[idx * 3 + 1] = p[1]; pos[idx * 3 + 2] = p[2];
+          idx++;
