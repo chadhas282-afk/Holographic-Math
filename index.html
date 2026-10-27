@@ -1088,3 +1088,13 @@
       m = s.match(/^slice4d\s+(.+?)\s*;\s*w\s*=\s*(.+)$/i);
       if (m) return { kind: 'slice4d', f: m[1].trim(), w: m[2].trim() };
       return null;
+      }
+
+    function odeRK4(fx, fy, fz, count, t, z0) {
+      const dt = 0.01;
+      const out = new Float32Array(count * 3);
+      const flat = typeof z0 === 'number';
+      let x = 0, y = 0, z = 0, seed = 0;
+      const F = (px, py, pz) => [fx(px, py, pz, 0, 0, t), fy(px, py, pz, 0, 0, t), flat ? 0 : fz(px, py, pz, 0, 0, t)];
+      const step = () => {
+        const k1 = F(x, y, z);
