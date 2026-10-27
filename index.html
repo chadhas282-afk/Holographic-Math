@@ -1078,3 +1078,13 @@
     }
 
     function parseComplexExpr(expr) {
+      const s = expr.trim();
+      let m = s.match(/^complex\s+(.+?)\s*;\s*w\s*=\s*(.+)$/i);
+      if (m) {
+        const p = splitTop(m[1]);
+        if (p.length !== 4) throw new Error('complex needs 4 expressions: re, im, outRe, outIm');
+        return { kind: 'complex', re: p[0], im: p[1], outRe: p[2], outIm: p[3], w: m[2].trim() };
+      }
+      m = s.match(/^slice4d\s+(.+?)\s*;\s*w\s*=\s*(.+)$/i);
+      if (m) return { kind: 'slice4d', f: m[1].trim(), w: m[2].trim() };
+      return null;
