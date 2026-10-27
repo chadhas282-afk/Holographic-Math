@@ -1298,3 +1298,13 @@
       for (let i = filled; i < count; i++) {
         const m = i % filled;
         out[i * 3] = out[m * 3]; out[i * 3 + 1] = out[m * 3 + 1]; out[i * 3 + 2] = out[m * 3 + 2];
+        }
+      return out;
+    }
+
+    function buildFromEquation(expr, count, t, a, b, c, k) {
+      const trimmed = normalizeExpr(expr);
+      t = t || 0;
+      a = (a == null) ? 1 : a; b = (b == null) ? 1 : b; c = (c == null) ? 1 : c; k = (k == null) ? 1 : k;
+      if (!count) count = 100000;
+      const aCode = '(' + a.toFixed(4) + ')', bCode = '(' + b.toFixed(4) + ')';
