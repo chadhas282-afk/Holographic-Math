@@ -1148,3 +1148,13 @@
       const mn = [Infinity, Infinity, Infinity], mx = [-Infinity, -Infinity, -Infinity];
       for (let i = 0; i < n; i++) {
         const k = i * 3, x = pos[k], y = pos[k + 1], z = pos[k + 2];
+        if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(z)) continue;
+        if (x < mn[0]) mn[0] = x; if (x > mx[0]) mx[0] = x;
+        if (y < mn[1]) mn[1] = y; if (y > mx[1]) mx[1] = y;
+        if (z < mn[2]) mn[2] = z; if (z > mx[2]) mx[2] = z;
+      }
+      if (!Number.isFinite(mx[0])) throw new Error('no valid points produced');
+      const cx = (mn[0] + mx[0]) / 2, cy = (mn[1] + mx[1]) / 2, cz = (mn[2] + mx[2]) / 2;
+      const ext = Math.max(mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]);
+      if (!(ext > 1e-6)) throw new Error('degenerate shape (no spread)');
+      const sc = 2.6 / ext;
