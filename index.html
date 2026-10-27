@@ -1288,3 +1288,13 @@
       let filled = 0;
       for (let k = 0; k < cap; k++) {
         const r = polish2D(uniq[k][0], uniq[k][1]);
+        if (!r) continue;
+        out[filled * 3] = r[0];
+        out[filled * 3 + 1] = r[1];
+        out[filled * 3 + 2] = (h2(r[0] * 13.7, r[1] * 9.1) - 0.5) * 0.08;
+        filled++;
+      }
+      if (filled < Math.min(12, count)) throw new Error('could not find a real curve for that equation');
+      for (let i = filled; i < count; i++) {
+        const m = i % filled;
+        out[i * 3] = out[m * 3]; out[i * 3 + 1] = out[m * 3 + 1]; out[i * 3 + 2] = out[m * 3 + 2];
