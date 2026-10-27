@@ -1318,3 +1318,13 @@
       if (fourier) {
         const nTerms = fourier.fixedN || (1 + Math.floor((t * 0.6) % 14));
         return autofit(stratifiedN(count, (u, layer) => {
+          const x = (u * 2 - 1) * Math.PI * 2;
+          const y = fourierPartialSum(fourier.waveform, x, nTerms);
+          return [x, y, (h2(layer * 31.7, u * 13.3) - 0.5) * 0.06];
+        }));
+      }
+
+      const ode = parseOdeExpr(trimmed);
+      if (ode) return autofit(odeRK4(mk(ode.fx), mk(ode.fy), mk(ode.fz), count, t));
+
+      const cx = parseComplexExpr(trimmed);
