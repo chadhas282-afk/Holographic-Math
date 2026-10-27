@@ -1248,3 +1248,13 @@
         for (let j = 0; j < SUB; j++) {
           const yy = py + j * hy;
           let fx = fn(px, yy, 0, 0, 0, t);
+          for (let i = 0; i < SUB; i++) {
+            const xx = px + i * hx;
+            const fx2 = fn(xx + hx, yy, 0, 0, 0, t);
+            edgeRoot(xx, yy, xx + hx, yy, fx, fx2);
+            fx = fx2;
+          }
+        }
+      }
+      function polish2D(gx0, gy0) {
+        let x = gx0, y = gy0;
