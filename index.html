@@ -1347,3 +1347,14 @@
         const ei = findTopLevelEqual(trimmed);
         if (ei >= 0) { lhs = trimmed.slice(0, ei).trim(); rhs = trimmed.slice(ei + 1).trim(); }
       }
+
+      if (isParam) {
+        const parts = splitTop(trimmed.slice(1, -1));
+        if (parts.length !== 2 && parts.length !== 3) throw new Error('parametric form needs [X, Y] or [X, Y, Z]');
+        const fns = parts.map(mk);
+        const plane = parts.length === 2;
+        return autofit(stratifiedN(count, (u, v) => {
+          const ua = u * Math.PI * 2, vb = v * Math.PI * 2;
+          return [
+            safeNum(fns[0](0, 0, 0, ua, vb, t)),
+            safeNum(fns[1](0, 0, 0, ua, vb, t)),
