@@ -1218,3 +1218,13 @@
       }
       const pts = [], hot = [];
       function edgeRoot(x0, y0, x1, y1, f0, f1) {
+        const sa = f0 > 0, sb = f1 > 0;
+        const za = Math.abs(f0) < 1e-9, zb = Math.abs(f1) < 1e-9;
+        if (sa === sb && !za && !zb) return;
+        const den = f1 - f0;
+        if (Math.abs(den) < 1e-30) return;
+        const u = -f0 / den;
+        if (!(u >= 0) || !(u <= 1)) return;
+        pts.push(x0 + (x1 - x0) * u, y0 + (y1 - y0) * u);
+      }
+      for (let j = 0; j < L0; j++) {
