@@ -1268,3 +1268,13 @@
           if (!(g2 > 1e-14)) break;
           const st = 0.85 * v / g2;
           x -= st * gx; y -= st * gy;
+          if (!Number.isFinite(x) || !Number.isFinite(y) || Math.abs(x) > B * 1.5 || Math.abs(y) > B * 1.5) return null;
+        }
+        if (Math.abs(fn(x, y, 0, 0, 0, t)) > 0.05) return null;
+        return [x, y];
+      }
+      const snap = cell / 8, seen = new Map(), uniq = [];
+      for (let k = 0; k + 1 < pts.length; k += 2) {
+        const x = pts[k], y = pts[k + 1];
+        if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+        const key = Math.round(x / snap) + '_' + Math.round(y / snap);
