@@ -1207,3 +1207,14 @@
       }
       return out;
     }
+
+    function implicitCurve2D(count, fn, t) {
+      t = t || 0;
+      const B = 4.2, L0 = 480, cell = (2 * B) / L0, W = L0 + 1;
+      const fv = new Float32Array(W * W);
+      for (let j = 0; j < W; j++) {
+        const y = -B + j * cell, r = j * W;
+        for (let i = 0; i < W; i++) fv[r + i] = fn(-B + i * cell, y, 0, 0, 0, t);
+      }
+      const pts = [], hot = [];
+      function edgeRoot(x0, y0, x1, y1, f0, f1) {
