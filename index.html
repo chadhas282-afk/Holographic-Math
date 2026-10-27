@@ -1358,3 +1358,13 @@
           return [
             safeNum(fns[0](0, 0, 0, ua, vb, t)),
             safeNum(fns[1](0, 0, 0, ua, vb, t)),
+            plane ? (h2(ua * 13.7, vb * 7.9) - 0.5) * 0.02 : safeNum(fns[2](0, 0, 0, ua, vb, t))
+          ];
+        }));
+      }
+
+      const lhsTrim = lhs === null ? '' : lhs.trim();
+      if (lhsTrim === 'r' || lhsTrim === 'r^2' || lhsTrim === 'r²') {
+        const fn = mk(rhs.replace(/θ/g, 'u'));
+        return autofit(stratifiedN(count, (u) => {
+          let ang = u * Math.PI * 2;
