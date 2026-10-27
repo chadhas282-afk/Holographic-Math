@@ -1188,3 +1188,13 @@
               const h = 0.05;
               const gx = (fn(x + h, y, z, 0, 0, t) - fn(x - h, y, z, 0, 0, t)) / (2 * h);
               const gy = (fn(x, y + h, z, 0, 0, t) - fn(x, y - h, z, 0, 0, t)) / (2 * h);
+              const gz = (fn(x, y, z + h, 0, 0, t) - fn(x, y, z - h, 0, 0, t)) / (2 * h);
+              const g2 = gx * gx + gy * gy + gz * gz;
+              if (!(g2 > 1e-12)) break;
+              const st = 0.9 * vv / g2;
+              x -= st * gx; y -= st * gy; z -= st * gz;
+              if (Math.abs(x) > B * 2 || Math.abs(y) > B * 2 || Math.abs(z) > B * 2) break;
+            }
+            if (ok) { out[filled * 3] = x; out[filled * 3 + 1] = y; out[filled * 3 + 2] = z; filled++; }
+          }
+        }
