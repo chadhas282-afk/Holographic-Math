@@ -1068,3 +1068,13 @@
       if (waveform === 'square') {
         for (let idx = 0, kk = 1; idx < nTerms; idx++, kk += 2) y += (4 / (Math.PI * kk)) * Math.sin(kk * x);
       } else if (waveform === 'sawtooth') {
+        for (let kk = 1; kk <= nTerms; kk++) y += (2 / Math.PI) * (Math.pow(-1, kk + 1) / kk) * Math.sin(kk * x);
+      } else if (waveform === 'triangle') {
+        for (let idx = 0, kk = 1; idx < nTerms; idx++, kk += 2) {
+          y += (8 / (Math.PI * Math.PI)) * (Math.pow(-1, (kk - 1) / 2) / (kk * kk)) * Math.sin(kk * x);
+        }
+      }
+      return y;
+    }
+
+    function parseComplexExpr(expr) {
