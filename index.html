@@ -1278,3 +1278,13 @@
         const x = pts[k], y = pts[k + 1];
         if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
         const key = Math.round(x / snap) + '_' + Math.round(y / snap);
+        if (seen.has(key)) continue;
+        seen.set(key, 1);
+        uniq.push([x, y]);
+      }
+      if (uniq.length < 12) throw new Error('could not find a real curve for that equation');
+      const out = new Float32Array(count * 3);
+      const cap = Math.min(uniq.length, count);
+      let filled = 0;
+      for (let k = 0; k < cap; k++) {
+        const r = polish2D(uniq[k][0], uniq[k][1]);
