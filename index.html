@@ -1258,3 +1258,13 @@
       }
       function polish2D(gx0, gy0) {
         let x = gx0, y = gy0;
+        for (let it = 0; it < 10; it++) {
+          const v = fn(x, y, 0, 0, 0, t);
+          if (Math.abs(v) < 1e-5) break;
+          const h = 0.02;
+          const gx = (fn(x + h, y, 0, 0, 0, t) - v) / h;
+          const gy = (fn(x, y + h, 0, 0, 0, t) - v) / h;
+          const g2 = gx * gx + gy * gy;
+          if (!(g2 > 1e-14)) break;
+          const st = 0.85 * v / g2;
+          x -= st * gx; y -= st * gy;
