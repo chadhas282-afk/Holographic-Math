@@ -1338,3 +1338,12 @@
         const ei = findTopLevelEqual(F);
         if (ei >= 0) F = '((' + F.slice(0, ei) + ')-(' + F.slice(ei + 1) + '))';
         F = F.replace(tokenRe('w'), '(' + wVal + ')');
+        return autofit(implicitSurface(count, mk(F), t));
+      }
+
+      const isParam = trimmed.startsWith('[') && trimmed.endsWith(']');
+      let lhs = null, rhs = null;
+      if (!isParam) {
+        const ei = findTopLevelEqual(trimmed);
+        if (ei >= 0) { lhs = trimmed.slice(0, ei).trim(); rhs = trimmed.slice(ei + 1).trim(); }
+      }
