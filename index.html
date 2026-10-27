@@ -1328,3 +1328,13 @@
       if (ode) return autofit(odeRK4(mk(ode.fx), mk(ode.fy), mk(ode.fz), count, t));
 
       const cx = parseComplexExpr(trimmed);
+      if (cx) {
+        const wVal = parseFloat(cx.w);
+        if (!Number.isFinite(wVal)) throw new Error('w must be a number, e.g. w=0.5');
+        if (cx.kind === 'complex') {
+          return autofit(odeRK4(mk(cx.outRe), mk(cx.outIm), mk('0'), count, t, wVal));
+        }
+        let F = splitTop(cx.f)[0];
+        const ei = findTopLevelEqual(F);
+        if (ei >= 0) F = '((' + F.slice(0, ei) + ')-(' + F.slice(ei + 1) + '))';
+        F = F.replace(tokenRe('w'), '(' + wVal + ')');
