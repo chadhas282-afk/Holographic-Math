@@ -1178,3 +1178,13 @@
       for (let si = 0; si < S && filled < count; si++) {
         for (let sj = 0; sj < S && filled < count; sj++) {
           for (let sk = 0; sk < S && filled < count; sk++) {
+            let x = -B + (2 * B) * (si + h2(si * 11.3, sj * 7.1)) / S;
+            let y = -B + (2 * B) * (sj + h2(sj * 3.9, sk * 19.7)) / S;
+            let z = -B + (2 * B) * (sk + h2(sk * 5.3, si * 8.9)) / S;
+            let ok = false;
+            for (let it = 0; it < K; it++) {
+              const vv = fn(x, y, z, 0, 0, t);
+              if (Math.abs(vv) < tol) { ok = true; break; }
+              const h = 0.05;
+              const gx = (fn(x + h, y, z, 0, 0, t) - fn(x - h, y, z, 0, 0, t)) / (2 * h);
+              const gy = (fn(x, y + h, z, 0, 0, t) - fn(x, y - h, z, 0, 0, t)) / (2 * h);
