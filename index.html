@@ -1118,3 +1118,13 @@
           for (let b = 0; b < 400 && !bad(); b++) step();
           if (bad()) reseed();
         }
+        for (let s = 0; s < 10; s++) step();
+        if (bad()) reseed();
+        out[i * 3] = x; out[i * 3 + 1] = y; out[i * 3 + 2] = z;
+      }
+      return out;
+    }
+
+    function stratifiedN(count, cb) {
+      const pos = new Float32Array(count * 3);
+      const S = Math.ceil(Math.sqrt(count));
