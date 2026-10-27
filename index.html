@@ -1198,3 +1198,12 @@
             if (ok) { out[filled * 3] = x; out[filled * 3 + 1] = y; out[filled * 3 + 2] = z; filled++; }
           }
         }
+        }
+      }
+      if (filled < count * 0.12) throw new Error('could not find a real surface for that equation');
+      for (let i = filled; i < count; i++) {
+        const m = i % filled;
+        out[i * 3] = out[m * 3]; out[i * 3 + 1] = out[m * 3 + 1]; out[i * 3 + 2] = out[m * 3 + 2];
+      }
+      return out;
+    }
