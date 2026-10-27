@@ -1158,3 +1158,12 @@
       const ext = Math.max(mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]);
       if (!(ext > 1e-6)) throw new Error('degenerate shape (no spread)');
       const sc = 2.6 / ext;
+      for (let i = 0; i < n; i++) {
+        const k = i * 3;
+        const x = pos[k], y = pos[k + 1], z = pos[k + 2];
+        pos[k] = Number.isFinite(x) ? (x - cx) * sc : 0;
+        pos[k + 1] = Number.isFinite(y) ? (y - cy) * sc : 0;
+        pos[k + 2] = Number.isFinite(z) ? (z - cz) * sc : 0;
+      }
+      return pos;
+    }
