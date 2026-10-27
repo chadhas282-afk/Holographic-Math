@@ -1228,3 +1228,13 @@
         pts.push(x0 + (x1 - x0) * u, y0 + (y1 - y0) * u);
       }
       for (let j = 0; j < L0; j++) {
+        const y0 = -B + j * cell;
+        for (let i = 0; i < L0; i++) {
+          const a = fv[j * W + i], b = fv[j * W + i + 1], c = fv[(j + 1) * W + i + 1], d = fv[(j + 1) * W + i];
+          if ((a > 0) === (b > 0) && (b > 0) === (c > 0) && (c > 0) === (d > 0) &&
+            Math.abs(a) > 1e-3 && Math.abs(b) > 1e-3 && Math.abs(c) > 1e-3 && Math.abs(d) > 1e-3) continue;
+          const x0 = -B + i * cell;
+          const n0 = pts.length;
+          edgeRoot(x0, y0, x0 + cell, y0, a, b);
+          edgeRoot(x0 + cell, y0, x0 + cell, y0 + cell, b, c);
+          edgeRoot(x0 + cell, y0 + cell, x0, y0 + cell, c, d);
