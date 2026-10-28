@@ -1438,3 +1438,13 @@
           idx++;
         }
       }
+      return pos;
+    }
+    function buildTorus(count) {
+      return stratPreset(count, (u, v) => {
+        const a = u * Math.PI * 2, b = v * Math.PI * 2, R = 1.6, r = 0.55, rc = R + r * Math.cos(b);
+        return [rc * Math.cos(a), rc * Math.sin(a), r * Math.sin(b)];
+      });
+    }
+    function buildMobius(count) {
+      return stratPreset(count, (u, v) => {
