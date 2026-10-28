@@ -1648,3 +1648,13 @@
       morphGeo.setAttribute('position', new THREE.BufferAttribute(aTo, 3));
       morphGeo.setAttribute('aFrom', new THREE.BufferAttribute(aFrom, 3));
       morphGeo.setAttribute('aTo', new THREE.BufferAttribute(aTo, 3));
+      morphGeo.setAttribute('aRand', new THREE.BufferAttribute(aRand, 3));
+      morphGeo.setAttribute('aGpuPos', new THREE.BufferAttribute(aGpuPos, 3));
+      morphGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 80);
+      if (typeof onGeoRealloc === 'function') onGeoRealloc();
+    }
+    const morphGeo2 = new THREE.BufferGeometry();
+    let aFrom2, aTo2, aRand2, aGpuPos2, currentPos2;
+    let geomN2 = 0;
+    function allocGeoArrays2(n) {
+      morphGeo2.dispose();
