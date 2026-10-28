@@ -1468,3 +1468,13 @@
         const k1 = f(x, y, z);
         const k2 = f(x + k1[0] * dt * 0.5, y + k1[1] * dt * 0.5, z + k1[2] * dt * 0.5);
         const k3 = f(x + k2[0] * dt * 0.5, y + k2[1] * dt * 0.5, z + k2[2] * dt * 0.5);
+        const k4 = f(x + k3[0] * dt, y + k3[1] * dt, z + k3[2] * dt);
+        x += dt * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6;
+        y += dt * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6;
+        z += dt * (k1[2] + 2 * k2[2] + 2 * k3[2] + k4[2]) / 6;
+      };
+      for (let w = 0; w < 20000; w++) rk();
+      for (let s = 0; s <= steps; s++) { raw[s * 3] = x; raw[s * 3 + 1] = y; raw[s * 3 + 2] = z; rk(); }
+      const pos = new Float32Array(count * 3);
+      const sc = 0.058;
+      for (let i = 0; i < count; i++) {
