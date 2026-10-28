@@ -1618,3 +1618,13 @@
         '}'
       ].join('\n'),
       uniforms: { uTime: { value: 0 }, uPixelRatio: { value: renderer.getPixelRatio() }, uViewportH: { value: viewH() } },
+      transparent: true, depthWrite: false
+    });
+    const starGroup = new THREE.Group();
+    const starMesh = new THREE.Points(starGeo, starMat);
+    starMesh.renderOrder = -1;
+    starGroup.add(starMesh);
+    scene.add(starGroup);
+
+    let lodEnabled = true;
+    function getLodFactor() {
