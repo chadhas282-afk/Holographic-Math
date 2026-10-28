@@ -1518,3 +1518,13 @@
     }
 
     const viewW = () => Math.max(1, window.innerWidth || 0);
+    const viewH = () => Math.max(1, window.innerHeight || 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor(0x050510, 1);
+    renderer.setSize(viewW(), viewH());
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, viewW() / viewH(), 0.1, 300);
