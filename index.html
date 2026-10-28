@@ -1628,3 +1628,13 @@
 
     let lodEnabled = true;
     function getLodFactor() {
+      if (!lodEnabled) return 1.0;
+      const dist = camera.position.length();
+      if (dist > 20) return 0.2;
+      if (dist > 15) return 0.4;
+      if (dist > 10) return 0.7;
+      return 1.0;
+    }
+    const morphGeo = new THREE.BufferGeometry();
+    let aFrom, aTo, aRand, aGpuPos, currentPos;
+    let geomN = 0;
