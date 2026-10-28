@@ -1488,3 +1488,13 @@
       { name: 'Torus', build: buildTorus },
       { name: 'Mobius Strip', build: buildMobius },
       { name: 'Sphere', build: buildSphere },
+      { name: 'Lorenz Attractor', build: buildLorenz },
+      { name: 'Custom', build: null }
+    ];
+
+    const presetCache = new Map();
+    let presetTimer = null;
+    let presetGen = 0;
+    function rebuildPresetCache() {
+      presetCache.clear();
+      clearTimeout(presetTimer);
