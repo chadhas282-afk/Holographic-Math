@@ -1508,3 +1508,13 @@
             try {
               const built = SHAPES[i].build(nAtRequest);
               if (gen === presetGen) presetCache.set(i, built);
+              } catch (e) { }
+            i++;
+            setTimeout(step, 1);
+          }
+        };
+        step();
+      }, 600);
+    }
+
+    const viewW = () => Math.max(1, window.innerWidth || 0);
