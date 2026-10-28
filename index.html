@@ -1368,3 +1368,13 @@
         const fn = mk(rhs.replace(/θ/g, 'u'));
         return autofit(stratifiedN(count, (u) => {
           let ang = u * Math.PI * 2;
+          let r = fn(0, 0, 0, ang, 0, t);
+          if (!Number.isFinite(r)) r = 0;
+          if (r < 0) { r = -r; ang += Math.PI; }
+          return [r * Math.cos(ang), r * Math.sin(ang), (h2(u * 13.7, 7.9) - 0.5) * 0.05];
+        }));
+      }
+
+      let mode, code;
+      if (lhs !== null) {
+        if (lhs === 'z') { mode = 'surface'; code = rhs; }
