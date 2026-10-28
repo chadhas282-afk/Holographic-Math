@@ -1378,3 +1378,12 @@
       let mode, code;
       if (lhs !== null) {
         if (lhs === 'z') { mode = 'surface'; code = rhs; }
+        else if (lhs === 'y' || lhs === 'x') { mode = 'curve'; code = rhs; }
+        else if (hasToken(lhs, 'z') || hasToken(rhs, 'z')) { mode = 'implicit'; code = '((' + lhs + ')-(' + rhs + '))'; }
+        else if (hasToken(lhs, 'y') || hasToken(rhs, 'y')) { mode = 'implicitY'; code = '((' + lhs + ')-(' + rhs + '))'; }
+        else throw new Error('unrecognized form - use z=f(x,y), y=f(x), r=f(θ), [X,Y,Z], or f(x,y,z)=0');
+      } else {
+        if (hasToken(trimmed, 'z')) { mode = 'implicit'; code = trimmed; }
+        else { mode = 'surface'; code = trimmed; }
+      }
+      const fn = mk(code);
