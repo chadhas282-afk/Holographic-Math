@@ -1537,3 +1537,14 @@
     controls.zoomSpeed = 0.9;
     controls.minDistance = 1.2;
     controls.maxDistance = 28;
+
+    const skyMat = new THREE.ShaderMaterial({
+      side: THREE.BackSide, depthWrite: false, transparent: true,
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: 'varying vec3 vDir;\nvoid main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: [
+        'precision highp float;',
+        'varying vec3 vDir;',
+        'uniform float uTime;',
+        'float hash(vec3 p){ return fract(sin(dot(p, vec3(12.9898,78.233,45.164))) * 43758.5453); }',
+        'float noise(vec3 p){',
