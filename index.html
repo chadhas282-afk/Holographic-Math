@@ -1418,3 +1418,13 @@
         if (lhs === 'z') return 'surface z=f(x,y)';
         if (lhs === 'x' || lhs === 'y') return '2D graph';
         if (lhs === 'r' || lhs === 'r^2' || lhs === 'r²') return 'polar r=f(θ)';
+        if (hasToken(lhs, 'z') || hasToken(rhs, 'z')) return 'implicit f(x,y,z)=0';
+        if (hasToken(lhs, 'y') || hasToken(rhs, 'y')) return '2D implicit curve';
+        return 'surface';
+      }
+      return hasToken(tr, 'z') ? 'implicit f(x,y,z)=0' : 'surface z=f(x,y)';
+    }
+
+    function stratPreset(count, cb) {
+      const pos = new Float32Array(count * 3);
+      const N = Math.ceil(Math.sqrt(count));
