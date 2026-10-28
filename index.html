@@ -1638,3 +1638,13 @@
     const morphGeo = new THREE.BufferGeometry();
     let aFrom, aTo, aRand, aGpuPos, currentPos;
     let geomN = 0;
+    function allocGeoArrays(n) {
+      morphGeo.dispose();
+      geomN = n;
+      const n3 = n * 3;
+      aFrom = new Float32Array(n3); aTo = new Float32Array(n3); aRand = new Float32Array(n3); currentPos = new Float32Array(n3);
+      aGpuPos = new Float32Array(n3);
+      for (let i = 0; i < n3; i++) aRand[i] = Math.random();
+      morphGeo.setAttribute('position', new THREE.BufferAttribute(aTo, 3));
+      morphGeo.setAttribute('aFrom', new THREE.BufferAttribute(aFrom, 3));
+      morphGeo.setAttribute('aTo', new THREE.BufferAttribute(aTo, 3));
