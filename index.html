@@ -1408,3 +1408,13 @@
       const tr = expr.trim();
       const fourier = parseFourierExpr(tr);
       if (fourier) return 'Fourier series (' + fourier.waveform + (fourier.fixedN ? ', ' + fourier.fixedN + ' terms' : ', live') + ')';
+      if (parseOdeExpr(tr)) return 'ODE trajectory';
+      let cx = null; try { cx = parseComplexExpr(tr); } catch (e) { }
+      if (cx) return cx.kind === 'slice4d' ? '4D slice' : 'complex flow';
+      if (tr.startsWith('[') && tr.endsWith(']')) return 'parametric [' + splitTop(tr.slice(1, -1)).length + 'D]';
+      const ei = findTopLevelEqual(tr);
+      if (ei >= 0) {
+        const lhs = tr.slice(0, ei).trim(), rhs = tr.slice(ei + 1).trim();
+        if (lhs === 'z') return 'surface z=f(x,y)';
+        if (lhs === 'x' || lhs === 'y') return '2D graph';
+        if (lhs === 'r' || lhs === 'r^2' || lhs === 'r²') return 'polar r=f(θ)';
