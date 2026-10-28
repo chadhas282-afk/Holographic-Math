@@ -1588,3 +1588,13 @@
       return { pos, size, seed, col };
     }
     const stars = buildStars(CONFIG.STARS);
+    const starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.BufferAttribute(stars.pos, 3));
+    starGeo.setAttribute('aSize', new THREE.BufferAttribute(stars.size, 1));
+    starGeo.setAttribute('aSeed', new THREE.BufferAttribute(stars.seed, 1));
+    starGeo.setAttribute('aColor', new THREE.BufferAttribute(stars.col, 3));
+    starGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 150);
+
+    const starMat = new THREE.ShaderMaterial({
+      vertexShader: [
+        'attribute float aSize;', 'attribute float aSeed;', 'attribute vec3 aColor;',
