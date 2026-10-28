@@ -1387,3 +1387,14 @@
         else { mode = 'surface'; code = trimmed; }
       }
       const fn = mk(code);
+
+      if (mode === 'surface') {
+        return autofit(stratifiedN(count, (u, v) => {
+          const x = (u * 2 - 1) * 3, y = (v * 2 - 1) * 3;
+          return [x, y, safeNum(fn(x, y, 0, 0, 0, t)) + (h2(u * 31.7, v * 13.3) - 0.5) * 0.012];
+        }));
+      }
+      if (mode === 'curve') {
+        return autofit(stratifiedN(count, (u, layer) => {
+          const x = (u * 2 - 1) * 4;
+          return [x, safeNum(fn(x, 0, 0, 0, 0, t)), (h2(layer * 31.7, u * 13.3) - 0.5) * 0.06];
