@@ -1428,3 +1428,13 @@
     function stratPreset(count, cb) {
       const pos = new Float32Array(count * 3);
       const N = Math.ceil(Math.sqrt(count));
+      let idx = 0;
+      outer:
+      for (let i = 0; i < N; i++) {
+        for (let j = 0; j < N; j++) {
+          if (idx >= count) break outer;
+          const p = cb((i + Math.random()) / N, (j + Math.random()) / N);
+          pos[idx * 3] = p[0]; pos[idx * 3 + 1] = p[1]; pos[idx * 3 + 2] = p[2];
+          idx++;
+        }
+      }
