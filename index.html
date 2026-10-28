@@ -1478,3 +1478,13 @@
       const pos = new Float32Array(count * 3);
       const sc = 0.058;
       for (let i = 0; i < count; i++) {
+        const s = i * 6 + 1;
+        pos[i * 3] = raw[s * 3] * sc; pos[i * 3 + 1] = raw[s * 3 + 1] * sc; pos[i * 3 + 2] = (raw[s * 3 + 2] - 24) * sc;
+      }
+      return pos;
+    }
+
+    const SHAPES = [
+      { name: 'Torus', build: buildTorus },
+      { name: 'Mobius Strip', build: buildMobius },
+      { name: 'Sphere', build: buildSphere },
