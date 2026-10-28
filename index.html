@@ -1398,3 +1398,13 @@
         return autofit(stratifiedN(count, (u, layer) => {
           const x = (u * 2 - 1) * 4;
           return [x, safeNum(fn(x, 0, 0, 0, 0, t)), (h2(layer * 31.7, u * 13.3) - 0.5) * 0.06];
+          }));
+      }
+      if (mode === 'implicitY') return autofit(implicitCurve2D(count, fn, t));
+      return autofit(implicitSurface(count, fn, t));
+    }
+
+    function equationKind(expr) {
+      const tr = expr.trim();
+      const fourier = parseFourierExpr(tr);
+      if (fourier) return 'Fourier series (' + fourier.waveform + (fourier.fixedN ? ', ' + fourier.fixedN + ' terms' : ', live') + ')';
