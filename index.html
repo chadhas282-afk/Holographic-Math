@@ -1498,3 +1498,13 @@
     function rebuildPresetCache() {
       presetCache.clear();
       clearTimeout(presetTimer);
+      const gen = ++presetGen;
+      const nAtRequest = geomN;
+      presetTimer = setTimeout(() => {
+        let i = 0;
+        const step = () => {
+          if (gen !== presetGen) return;
+          if (i < 4) {
+            try {
+              const built = SHAPES[i].build(nAtRequest);
+              if (gen === presetGen) presetCache.set(i, built);
