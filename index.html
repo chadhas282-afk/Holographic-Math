@@ -1448,3 +1448,13 @@
     }
     function buildMobius(count) {
       return stratPreset(count, (u, v) => {
+        const tA = u * Math.PI * 2, s = v * 2 - 1, R = 1.8, w = 0.7, half = tA * 0.5, c = R + s * w * Math.cos(half);
+        return [c * Math.cos(tA), c * Math.sin(tA), s * w * Math.sin(half)];
+      });
+    }
+    function buildSphere(count) {
+      return stratPreset(count, (u, v) => {
+        const a = u * Math.PI * 2, b = Math.acos(1 - 2 * v), R = 2.0, s = Math.sin(b);
+        return [R * s * Math.cos(a), R * Math.cos(b), R * s * Math.sin(a)];
+      });
+    }
