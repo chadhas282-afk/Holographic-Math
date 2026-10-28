@@ -1568,3 +1568,13 @@
         '  col = mix(col, deep, smoothstep(-0.12,0.35,d.y) * 0.35);',
         '  gl_FragColor = vec4(col, 1.0);',
         '}'
+        ].join('\n')
+    });
+    const sky = new THREE.Mesh(new THREE.SphereGeometry(140, 48, 32), skyMat);
+    sky.frustumCulled = false;
+    sky.renderOrder = -10;
+    scene.add(sky);
+
+    function buildStars(count) {
+      const pos = new Float32Array(count * 3), size = new Float32Array(count), seed = new Float32Array(count), col = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
