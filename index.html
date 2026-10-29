@@ -1668,3 +1668,13 @@
       morphGeo2.setAttribute('aTo', new THREE.BufferAttribute(aTo2, 3));
       morphGeo2.setAttribute('aRand', new THREE.BufferAttribute(aRand2, 3));
       morphGeo2.setAttribute('aGpuPos', new THREE.BufferAttribute(aGpuPos2, 3));
+      morphGeo2.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 80);
+    }
+    let onGeoRealloc = null;
+
+    const morphVertex = [
+      'attribute vec3 aFrom;',
+      'attribute vec3 aTo;',
+      'attribute vec3 aRand;',
+      'attribute vec3 aGpuPos;',
+      'uniform float uUseExternal;',
