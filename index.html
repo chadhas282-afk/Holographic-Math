@@ -1907,3 +1907,13 @@
         '  float fade = 1.0 - smoothstep(0.5, 1.0, length(uv));',
         '  float alpha = (0.15 + grid * 0.1 + shadow * 0.4) * fade;',
         '  gl_FragColor = vec4(col, alpha);',
+        '}'
+      ].join('\n')
+    });
+    const groundMesh = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), groundMat);
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = -3.2;
+    groundMesh.visible = false;
+    scene.add(groundMesh);
+
+    const coordGroup = new THREE.Group();
