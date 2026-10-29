@@ -1947,3 +1947,13 @@
     const outputPass = new OutputPass();
     const bokehPass = new BokehPass(scene, camera, { focus: 8.0, aperture: 0.0008, maxblur: 0.012 });
     bokehPass.enabled = false;
+
+    const filmGradeShader = {
+      uniforms: {
+        tDiffuse: { value: null }, uTime: { value: 0 }, uChromAberr: { value: 0 }, uVignette: { value: 0.35 },
+        uGrain: { value: 0.12 }, uToneMap: { value: 1 },
+        uLift: { value: new THREE.Vector3(0, 0, 0) }, uGamma: { value: new THREE.Vector3(1, 1, 1) }, uGain: { value: new THREE.Vector3(1, 1, 1) },
+        uSaturation: { value: 1.0 }, uContrast: { value: 1.05 }
+      },
+      vertexShader: 'varying vec2 vUv;\nvoid main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: [
