@@ -1838,3 +1838,13 @@
     const morphMat = new THREE.ShaderMaterial({
       vertexShader: morphVertex,
       fragmentShader: morphFragment,
+      uniforms: {
+        uProgress: { value: 0 },
+        uTime: { value: 0 },
+        uSize: { value: CONFIG.POINT_SIZE },
+        uPixelRatio: { value: renderer.getPixelRatio() },
+        uViewportH: { value: viewH() },
+        uBrightness: { value: CONFIG.BRIGHTNESS },
+        uPalette: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uMouseActive: { value: 0 },
