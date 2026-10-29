@@ -1828,3 +1828,13 @@
       '  vec2 q = gl_PointCoord - 0.5;',
       '  float d = length(q);',
       '  if (d > 0.5) discard;',
+      '  float ang = atan(q.y, q.x);',
+      '  float arm = pow(abs(cos(4.0 * ang)), 7.0) * max(1.0 - 5.0 * d, 0.0);',
+      '  float core = step(d, 0.05);',
+      '  gl_FragColor = vec4(vColor * (0.55 + arm * 1.7 + core * 2.0), 1.0);',
+      '}'
+    ].join('\n');
+
+    const morphMat = new THREE.ShaderMaterial({
+      vertexShader: morphVertex,
+      fragmentShader: morphFragment,
