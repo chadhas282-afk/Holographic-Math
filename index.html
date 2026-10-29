@@ -1937,3 +1937,13 @@
     addAxis([0, 0, -3.4], [0, 0, 3.4], 0x66aaff);
     coordGroup.visible = false;
     scene.add(coordGroup);
+    let gridOn = false;
+    let glintsOn = true;
+    const composer = new EffectComposer(renderer);
+    composer.setPixelRatio(renderer.getPixelRatio());
+    const renderPass = new RenderPass(scene, camera);
+    const afterPass = new AfterimagePass(0.9);
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(viewW(), viewH()), 1.0, 0.75, 0.18);
+    const outputPass = new OutputPass();
+    const bokehPass = new BokehPass(scene, camera, { focus: 8.0, aperture: 0.0008, maxblur: 0.012 });
+    bokehPass.enabled = false;
