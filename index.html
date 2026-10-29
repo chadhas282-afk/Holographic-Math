@@ -1818,3 +1818,13 @@
       '  core = pow(core, 1.5);',
       '  float glow = 0.15 + core * 1.9;',
       '  gl_FragColor = vec4(vColor * glow, core);',
+      '}'
+    ].join('\n');
+
+    const morphFragmentGlint = [
+      'precision highp float;',
+      'varying vec3 vColor;',
+      'void main(){',
+      '  vec2 q = gl_PointCoord - 0.5;',
+      '  float d = length(q);',
+      '  if (d > 0.5) discard;',
