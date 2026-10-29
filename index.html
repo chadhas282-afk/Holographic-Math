@@ -1798,3 +1798,12 @@
       '          + 0.34 * smoothstep(-2.8, 2.8, aTo.y)',
       '          + 0.26 * smoothstep(-2.8, 2.8, aTo.z);',
       '  vec3 col = mix(palette(uPalette, k0), palette(uPalette, k1), lp);',
+      '  float rim = pow(1.0 - abs(dot(normalize(pos), normalize(-mv.xyz))), 2.2);',
+      '  col *= (0.62 + aRand.x * 0.75) * uBrightness;',
+      '  col *= 1.0 + 0.55 * rim;',
+      '  float aoFac = 0.86 + 0.14 * smoothstep(0.0, 1.4, length(pos));',
+      '  col *= mix(1.0, aoFac, uAO);',
+      '  col *= uTint;',
+      '  vColor = col;',
+      '}'
+    ].join('\n');
