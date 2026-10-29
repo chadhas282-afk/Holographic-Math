@@ -1927,3 +1927,13 @@
       }
       g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
       return g;
+      })(), new THREE.LineBasicMaterial({ color: 0x4060b0, transparent: true, opacity: 0.28, blending: THREE.AdditiveBlending, depthWrite: false })));
+    function addAxis(from, to, color) {
+      const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...from), new THREE.Vector3(...to)]);
+      coordGroup.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false })));
+    }
+    addAxis([-3.4, 0, 0], [3.4, 0, 0], 0xff5566);
+    addAxis([0, -3.4, 0], [0, 3.4, 0], 0x66ff88);
+    addAxis([0, 0, -3.4], [0, 0, 3.4], 0x66aaff);
+    coordGroup.visible = false;
+    scene.add(coordGroup);
