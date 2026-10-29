@@ -1868,3 +1868,13 @@
       return new THREE.ShaderMaterial({
         vertexShader: morphVertex, fragmentShader: frag, uniforms: sharedUniforms(over),
         transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
+        });
+    }
+    const glintsMat = pointMat(morphFragmentGlint, {});
+    const layer2Mat = pointMat(morphFragment, { uTint: { value: new THREE.Vector3(1.05, 1.2, 0.9) } });
+    const mirrorTint = () => new THREE.Vector3(0.85, 1.05, 1.35);
+    const mirrorMat = pointMat(morphFragment, { uMirrorMul: { value: 1 }, uMirrorAxis: { value: 0 }, uTint: { value: mirrorTint() } });
+    const mirrorGlintsMat = pointMat(morphFragmentGlint, { uMirrorMul: { value: 1 }, uMirrorAxis: { value: 0 }, uTint: { value: mirrorTint() } });
+
+    const pointsMesh = new THREE.Points(morphGeo, morphMat);
+    const glintsMesh = new THREE.Points(morphGeo, glintsMat);
