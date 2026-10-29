@@ -1878,3 +1878,13 @@
 
     const pointsMesh = new THREE.Points(morphGeo, morphMat);
     const glintsMesh = new THREE.Points(morphGeo, glintsMat);
+    const layer2Mesh = new THREE.Points(morphGeo2, layer2Mat);
+    const mirrorMesh = new THREE.Points(morphGeo, mirrorMat);
+    const mirrorGlintsMesh = new THREE.Points(morphGeo, mirrorGlintsMat);
+    [pointsMesh, glintsMesh, layer2Mesh, mirrorMesh, mirrorGlintsMesh].forEach(m => { m.frustumCulled = false; });
+    layer2Mesh.visible = false; mirrorMesh.visible = false; mirrorGlintsMesh.visible = false;
+    const graph = new THREE.Group();
+    graph.add(pointsMesh, glintsMesh, layer2Mesh, mirrorMesh, mirrorGlintsMesh);
+    scene.add(graph);
+
+    const groundMat = new THREE.ShaderMaterial({
