@@ -1858,3 +1858,13 @@
         uMirrorAxis: { value: 0 },
         uMirrorMul: { value: 0 },
         uCellLod: { value: new Array(27).fill(1.0) },
+        uSpatialLodOn: { value: 0 }
+      },
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
+    });
+
+    function sharedUniforms(over) { return Object.assign({}, morphMat.uniforms, over); }
+    function pointMat(frag, over) {
+      return new THREE.ShaderMaterial({
+        vertexShader: morphVertex, fragmentShader: frag, uniforms: sharedUniforms(over),
+        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
