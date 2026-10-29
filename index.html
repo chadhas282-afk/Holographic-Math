@@ -1917,3 +1917,13 @@
     scene.add(groundMesh);
 
     const coordGroup = new THREE.Group();
+    coordGroup.add(new THREE.LineSegments((() => {
+      const g = new THREE.BufferGeometry();
+      const pts = [];
+      const R = 3.2, N = 16;
+      for (let i = 0; i <= N; i++) {
+        const v = -R + (2 * R * i) / N;
+        pts.push(v, -R, 0, v, R, 0, -R, v, 0, R, v, 0);
+      }
+      g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+      return g;
