@@ -1888,3 +1888,12 @@
     scene.add(graph);
 
     const groundMat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: { uTime: { value: 0 }, uShadowSize: { value: 2.5 } },
+      vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: [
+        'precision highp float;',
+        'varying vec2 vUv;',
+        'uniform float uTime;',
+        'uniform float uShadowSize;',
+        'void main(){',
