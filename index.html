@@ -2148,3 +2148,13 @@
       }
       rebuildVectorField();
     }
+
+    let layer2Pos = null, liveActive2 = false, lastExpr2 = '', kindText2 = '', seq2 = 0;
+
+    function applyEvalResult2(s, pts, err) {
+      if (s !== seq2) return;
+      eq2Hint.classList.remove('err');
+      eq2.classList.remove('err');
+      if (err) {
+        const msg = errMsg(err);
+        const fr = suggestFix(lastExpr2 || eq2.value, msg);
