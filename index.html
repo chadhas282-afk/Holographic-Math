@@ -2008,3 +2008,13 @@
     composer.addPass(outputPass);
 
     allocGeoArrays(CONFIG.COUNT);
+    allocGeoArrays2(CONFIG.COUNT);
+    {
+      const initTarget = SHAPES[0].build(CONFIG.COUNT);
+      aFrom.set(initTarget); aTo.set(initTarget); currentPos.set(initTarget);
+    }
+    rebuildPresetCache();
+
+    let currentShape = 0;
+    let progress = 0;
+    let morphing = false;
