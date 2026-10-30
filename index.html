@@ -2207,3 +2207,14 @@
       eq2.classList.remove('err');
       runEval(2, { seq: ++seq2, expr, count: geomN2, t: 0, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
     }
+
+    function switchShape(i, force) {
+      if (i === 4 && (!customPos || customPos.length !== geomN * 3)) { renderEquation(true); return; }
+      if (i === currentShape && !force) {
+        swayPulseOn = true;
+        swayPulseStart = performance.now();
+        morphMat.uniforms.uSway.value = 1;
+        return;
+      }
+      let target;
+      if (i === 4) {
