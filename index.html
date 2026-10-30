@@ -2098,3 +2098,13 @@
 
     function suggestFix(expr, msg) {
       const sug = [];
+      const s = String(expr);
+      if (/[0-9][A-Za-z_θ(]/.test(s) && !/[0-9]\s*\*/.test(s)) sug.push('put * between a number and a variable (2x → 2*x)');
+      let open = 0, close = 0, bad = false;
+      for (const ch of s) {
+        if (ch === '(') open++;
+        else if (ch === ')') { close++; if (close > open) bad = true; }
+      }
+      if (bad) sug.push('extra closing bracket )');
+      else if (open > close) sug.push('missing closing bracket — add one or more )');
+      if (/^return|^function|\beval\b|\bdocument\b/.test(s)) sug.push("that's code, not math — keep it as an equation like z = f(x,y)");
