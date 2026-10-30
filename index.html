@@ -2078,3 +2078,13 @@
           finishEval(ch, r);
         }, 0);
       }
+      }
+    function finishEval(ch, d) {
+      const c = chans[ch];
+      c.busy = false; c.cur = null;
+      c.ms = performance.now() - c.start;
+      (ch === 2 ? applyEvalResult2 : applyEvalResult)(d.seq, d.error ? null : d.positions, d.error || null);
+      if (c.pending) { const r = c.pending; c.pending = null; runEval(ch, r); }
+    }
+
+    let customPos = null;
