@@ -2088,3 +2088,13 @@
     }
 
     let customPos = null;
+    let liveActive = false;
+    let lastExpr = '';
+    let kindText = '';
+    let liveText = '';
+    let seq = 0;
+    let wantSwitch = false;
+    let multiParts = null, multiIdx = 0, multiTimer = null;
+
+    function suggestFix(expr, msg) {
+      const sug = [];
