@@ -2248,3 +2248,13 @@
     }
 
     function setCount(n) {
+      CONFIG.COUNT = n;
+      countVal.textContent = fmtK(n);
+      allocGeoArrays(n);
+      if (layerOn) { allocGeoArrays2(n); if (eq2.value.trim()) renderEq2(); }
+      if (currentShape === 4) {
+        customPos = null;
+        startExpr(lastExpr, true, null);
+      } else {
+        let target = presetCache.get(currentShape);
+        if (!target || target.length !== n * 3) target = SHAPES[currentShape].build(n);
