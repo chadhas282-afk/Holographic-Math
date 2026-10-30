@@ -2047,3 +2047,14 @@
       '    self.postMessage({ seq: d.seq, error: String((err && err.message) || err) });\n' +
       '  }\n' +
       '};\n';
+
+      const chans = {};
+    function mkChan(ch) {
+      const c = { ch, w: null, busy: false, pending: null, cur: null, start: 0, ms: 0 };
+      try {
+        const url = URL.createObjectURL(new Blob([WORKER_SRC], { type: 'text/javascript' }));
+        c.w = new Worker(url);
+        c.w.onmessage = (e) => finishEval(ch, e.data);
+        c.w.onerror = () => {
+          c.w = null;
+          if (c.cur) { const r = c.cur; c.busy = false; runEval(ch, r); }
