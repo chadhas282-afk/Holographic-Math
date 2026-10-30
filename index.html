@@ -2028,3 +2028,13 @@
     }
     function resetPauseUI() {
       paused = false;
+      pauseBtn.textContent = 'Pause';
+      pauseBtn.classList.remove('active');
+      scrub.disabled = true;
+    }
+
+    const MATH_FNS = [safeNum, normalizeExpr, h2, hasToken, makeMathFn, tokenRe, applyParams, cachedMake,
+      splitTop, findTopLevelEqual, parseOdeExpr, parseComplexExpr, parseFourierExpr, fourierPartialSum, odeRK4, stratifiedN, autofit,
+      implicitSurface, implicitCurve2D, buildFromEquation].map(f => f.toString()).join('\n\n');
+    const WORKER_SRC = MATH_FNS + '\n\n' +
+      'const FN_CACHE = new Map();\n' +
