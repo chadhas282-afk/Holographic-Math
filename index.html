@@ -1988,3 +1988,13 @@
         '    col.b = texture2D(tDiffuse, uv - vec2(offset, 0.0)).b;',
         '  }',
         '  col = (col + uLift) * uGain;',
+        '  col = pow(max(col, 0.0), uGamma);',
+        '  col = mix(vec3(dot(col, vec3(0.2126,0.7152,0.0722))), col, uSaturation);',
+        '  col = max(mix(vec3(0.5), col, uContrast), 0.0);',
+        '  col = tone(col);',
+        '  col += grain;',
+        '  col *= vig;',
+        '  gl_FragColor = vec4(col, 1.0);',
+        '}'
+      ].join('\n')
+    };
