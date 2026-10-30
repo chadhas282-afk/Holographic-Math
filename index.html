@@ -2058,3 +2058,13 @@
         c.w.onerror = () => {
           c.w = null;
           if (c.cur) { const r = c.cur; c.busy = false; runEval(ch, r); }
+          };
+      } catch (err) { c.w = null; }
+      chans[ch] = c;
+    }
+    mkChan(1); mkChan(2);
+
+    function runEval(ch, req) {
+      const c = chans[ch];
+      if (c.busy) { c.pending = req; return; }
+      c.busy = true; c.cur = req; c.start = performance.now();
