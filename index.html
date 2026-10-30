@@ -2108,3 +2108,13 @@
       if (bad) sug.push('extra closing bracket )');
       else if (open > close) sug.push('missing closing bracket — add one or more )');
       if (/^return|^function|\beval\b|\bdocument\b/.test(s)) sug.push("that's code, not math — keep it as an equation like z = f(x,y)");
+      if (msg && /is not defined/i.test(msg)) sug.push('unknown name — use x, y, z (and t, a, b, c, k)');
+      return sug.slice(0, 2).join(' · ');
+    }
+
+    function errMsg(err) { return typeof err === 'string' ? err : ((err && err.message) || String(err)); }
+
+    function applyEvalResult(s, pts, err) {
+      if (s !== seq) return;
+      eqHint.classList.remove('err');
+      eqInput.classList.remove('err');
