@@ -2228,3 +2228,13 @@
       currentShape = i;
       const fourier = (i === 4 && lastExpr) ? parseFourierExpr(lastExpr) : null;
       liveActive = (i === 4) && !!lastExpr && (hasToken(lastExpr, 't') || (!!fourier && !fourier.fixedN));
+       if (i === 4 && liveActive) {
+        aFrom.set(target);
+        morphing = false;
+      } else {
+        morphing = true;
+      }
+      progress = 0;
+      resetPauseUI();
+      morphGeo.attributes.aFrom.needsUpdate = true;
+      morphGeo.attributes.aTo.needsUpdate = true;
