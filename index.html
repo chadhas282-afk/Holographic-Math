@@ -2068,3 +2068,13 @@
       const c = chans[ch];
       if (c.busy) { c.pending = req; return; }
       c.busy = true; c.cur = req; c.start = performance.now();
+      if (c.w) {
+        c.w.postMessage({ seq: req.seq, expr: req.expr, count: req.count, t: req.t, a: req.a, b: req.b, c: req.c, k: req.k });
+      } else {
+        setTimeout(() => {
+          let r;
+          try { r = { seq: req.seq, positions: buildFromEquation(req.expr, req.count, req.t, req.a, req.b, req.c, req.k) }; }
+          catch (err) { r = { seq: req.seq, error: String((err && err.message) || err) }; }
+          finishEval(ch, r);
+        }, 0);
+      }
