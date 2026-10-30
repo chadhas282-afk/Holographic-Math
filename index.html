@@ -2218,3 +2218,13 @@
       }
       let target;
       if (i === 4) {
+        target = customPos;
+      } else {
+        target = presetCache.get(i);
+        if (!target || target.length !== geomN * 3) target = SHAPES[i].build(geomN);
+      }
+      aFrom.set(aTo);
+      aTo.set(target);
+      currentShape = i;
+      const fourier = (i === 4 && lastExpr) ? parseFourierExpr(lastExpr) : null;
+      liveActive = (i === 4) && !!lastExpr && (hasToken(lastExpr, 't') || (!!fourier && !fourier.fixedN));
