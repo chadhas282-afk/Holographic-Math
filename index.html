@@ -2168,3 +2168,13 @@
       aFrom2.set(pts); aTo2.set(pts); currentPos2.set(pts);
       morphGeo2.attributes.aFrom.needsUpdate = true;
       morphGeo2.attributes.aTo.needsUpdate = true;
+      q2Hint.textContent = (liveActive2 ? 'layer 2 live · ' : 'layer 2 rendered · ') + kindText2;
+    }
+
+    function startExpr(expr, morph, label) {
+      if (!expr) return;
+      lastExpr = expr;
+      const fourier = parseFourierExpr(expr);
+      liveActive = hasToken(expr, 't') || (!!fourier && !fourier.fixedN);
+      wantSwitch = !!morph;
+      kindText = (label ? label + ' · ' : '') + equationKind(expr);
