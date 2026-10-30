@@ -2018,3 +2018,13 @@
     let currentShape = 0;
     let progress = 0;
     let morphing = false;
+    let paused = false;
+    let swayPulseStart = 0;
+    let swayPulseOn = false;
+
+    function updateUI(i) {
+      shapeBtns.forEach((b, n) => b.classList.toggle('active', n === i));
+      shapeLabel.textContent = SHAPES[i].name;
+    }
+    function resetPauseUI() {
+      paused = false;
