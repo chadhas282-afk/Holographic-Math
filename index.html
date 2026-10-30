@@ -2198,3 +2198,12 @@
 
     function renderEq2() {
       const expr = normalizeExpr(eq2.value.trim());
+      if (!expr) return;
+      lastExpr2 = expr;
+      liveActive2 = hasToken(expr, 't');
+      kindText2 = equationKind(expr);
+      eq2Hint.textContent = 'computing…';
+      eq2Hint.classList.remove('err');
+      eq2.classList.remove('err');
+      runEval(2, { seq: ++seq2, expr, count: geomN2, t: 0, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
+    }
