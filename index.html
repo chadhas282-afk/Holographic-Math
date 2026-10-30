@@ -2158,3 +2158,13 @@
       if (err) {
         const msg = errMsg(err);
         const fr = suggestFix(lastExpr2 || eq2.value, msg);
+        eq2Hint.textContent = 'layer 2: cannot parse: ' + msg + (fr ? ' — ' + fr : '');
+        eq2Hint.classList.add('err');
+        eq2.classList.add('err');
+        return;
+      }
+      if (!pts || pts.length !== geomN2 * 3) { if (layerOn) renderEq2(); return; }
+      layer2Pos = pts;
+      aFrom2.set(pts); aTo2.set(pts); currentPos2.set(pts);
+      morphGeo2.attributes.aFrom.needsUpdate = true;
+      morphGeo2.attributes.aTo.needsUpdate = true;
