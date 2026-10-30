@@ -2138,3 +2138,13 @@
         eqHint.textContent = liveActive ? liveText : 'rendered · ' + kindText + ' · auto-scaled';
       } else if (liveActive && currentShape === 4) {
         aFrom.set(pts); aTo.set(pts); currentPos.set(pts);
+        morphGeo.attributes.aFrom.needsUpdate = true;
+        morphGeo.attributes.aTo.needsUpdate = true;
+        morphing = false; progress = 0;
+        morphMat.uniforms.uProgress.value = 0;
+        eqHint.textContent = liveText;
+      } else {
+        eqHint.textContent = 'rendered · ' + kindText + ' · auto-scaled';
+      }
+      rebuildVectorField();
+    }
