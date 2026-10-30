@@ -2128,3 +2128,13 @@
         return;
       }
       if (!pts || pts.length !== geomN * 3) {
+        startExpr(lastExpr, wantSwitch, null);
+        return;
+      }
+      customPos = pts;
+      if (wantSwitch) {
+        wantSwitch = false;
+        switchShape(4, true);
+        eqHint.textContent = liveActive ? liveText : 'rendered · ' + kindText + ' · auto-scaled';
+      } else if (liveActive && currentShape === 4) {
+        aFrom.set(pts); aTo.set(pts); currentPos.set(pts);
