@@ -2238,3 +2238,13 @@
       resetPauseUI();
       morphGeo.attributes.aFrom.needsUpdate = true;
       morphGeo.attributes.aTo.needsUpdate = true;
+      morphMat.uniforms.uProgress.value = progress;
+      updateUI(i);
+      if (i === 4) rebuildVectorField(); else vecFieldMesh.visible = false;
+    }
+
+    function fmtK(n) {
+      return n >= 1000000 ? ((n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M') : (n / 1000).toFixed(0) + 'k';
+    }
+
+    function setCount(n) {
