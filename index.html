@@ -2118,3 +2118,13 @@
       if (s !== seq) return;
       eqHint.classList.remove('err');
       eqInput.classList.remove('err');
+      if (err) {
+        const msg = errMsg(err);
+        const fr = suggestFix(lastExpr || eqInput.value, msg);
+        eqHint.textContent = 'cannot parse: ' + msg + (fr ? ' — ' + fr : '');
+        eqHint.classList.add('err');
+        eqInput.classList.add('err');
+        wantSwitch = false;
+        return;
+      }
+      if (!pts || pts.length !== geomN * 3) {
