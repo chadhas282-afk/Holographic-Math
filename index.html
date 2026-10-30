@@ -1998,3 +1998,13 @@
         '}'
       ].join('\n')
     };
+    const filmPass = new ShaderPass(filmGradeShader);
+
+    composer.addPass(renderPass);
+    composer.addPass(afterPass);
+    composer.addPass(bokehPass);
+    composer.addPass(bloomPass);
+    composer.addPass(filmPass);
+    composer.addPass(outputPass);
+
+    allocGeoArrays(CONFIG.COUNT);
