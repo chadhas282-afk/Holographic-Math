@@ -2038,3 +2038,12 @@
       implicitSurface, implicitCurve2D, buildFromEquation].map(f => f.toString()).join('\n\n');
     const WORKER_SRC = MATH_FNS + '\n\n' +
       'const FN_CACHE = new Map();\n' +
+      'self.onmessage = (e) => {\n' +
+      '  const d = e.data;\n' +
+      '  try {\n' +
+      '    const positions = buildFromEquation(d.expr, d.count, d.t, d.a, d.b, d.c, d.k);\n' +
+      '    self.postMessage({ seq: d.seq, positions }, [positions.buffer]);\n' +
+      '  } catch (err) {\n' +
+      '    self.postMessage({ seq: d.seq, error: String((err && err.message) || err) });\n' +
+      '  }\n' +
+      '};\n';
