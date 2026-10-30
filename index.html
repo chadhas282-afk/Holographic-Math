@@ -2178,3 +2178,13 @@
       liveActive = hasToken(expr, 't') || (!!fourier && !fourier.fixedN);
       wantSwitch = !!morph;
       kindText = (label ? label + ' · ' : '') + equationKind(expr);
+      liveText = fourier ? 'live · ' + kindText + ' · terms build up, then reset' : 'live · ' + kindText + ' · t drives the animation';
+      eqHint.textContent = 'computing…';
+      eqHint.classList.remove('err');
+      eqInput.classList.remove('err');
+      runEval(1, { seq: ++seq, expr, count: geomN, t: 0, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
+    }
+
+    function renderEquation(morph) {
+      const raw = eqInput.value.trim();
+      if (!raw) return;
