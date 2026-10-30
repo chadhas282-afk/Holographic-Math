@@ -2188,3 +2188,13 @@
     function renderEquation(morph) {
       const raw = eqInput.value.trim();
       if (!raw) return;
+      clearTimeout(multiTimer); multiTimer = null; multiParts = null;
+      const special = /^\s*(complex|slice4d)\b/i.test(raw);
+      const parts = special ? [normalizeExpr(raw)] : raw.split(';').map(e => normalizeExpr(e.trim())).filter(Boolean);
+      if (!parts.length) return;
+      if (parts.length > 1) { multiParts = parts; multiIdx = 0; }
+      startExpr(parts[0], morph, parts.length > 1 ? 'multi [1/' + parts.length + ']' : null);
+    }
+
+    function renderEq2() {
+      const expr = normalizeExpr(eq2.value.trim());
