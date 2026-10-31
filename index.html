@@ -2528,3 +2528,14 @@
       }
       const { WebGPURenderer } = await import('three/webgpu');
       const { Fn, instanceIndex, instancedArray, uniform, float, clamp, mix, sin, smoothstep } = await import('three/tsl');
+      
+      const n = geomN;
+      const r = new WebGPURenderer({ antialias: false });
+      await r.init();
+
+      const fromNode = instancedArray(aFrom.slice(), 'vec3');
+      const toNode = instancedArray(aTo.slice(), 'vec3');
+      const randNode = instancedArray(aRand.slice(), 'vec3');
+      const posNode = instancedArray(n, 'vec3');
+      const uProgress = uniform(0);
+      const uTime = uniform(0);
