@@ -2448,3 +2448,13 @@
         core = stops[0] || new THREE.Vector3(0.05, 0.1, 0.2);
         glow = stops[stops.length - 1] || new THREE.Vector3(0.6, 0.85, 1);
       } else {
+        const pair = PALETTE_GLOW[paletteSel.value] || PALETTE_GLOW[0];
+        core = new THREE.Vector3(...pair[0]); glow = new THREE.Vector3(...pair[1]);
+      }
+      sdfVolumeShader.uniforms.uCoreColor.value.copy(core);
+      sdfVolumeShader.uniforms.uGlowColor.value.copy(glow);
+    }
+    paletteSel.addEventListener('change', updateSdfColors);
+    updateSdfColors();
+
+    volumetricBtn.addEventListener('click', () => {
