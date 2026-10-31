@@ -2468,3 +2468,13 @@
     function updateSdfVolume(dt) {
       if (!volumetricOn) return;
       const want = sdfTargetMode(currentShape);
+      if (want !== sdfMode && sdfAlpha <= 0.02) sdfMode = want;
+      const targetAlpha = (sdfMode === want) ? (want !== 0 ? 1 : 0) : 0;
+      sdfAlpha += (targetAlpha - sdfAlpha) * Math.min(1, dt * 4);
+      const u = sdfVolumeShader.uniforms;
+      u.uShapeMode.value = sdfMode;
+      u.uShapeAlpha.value = sdfAlpha;
+      u.uCameraPos.value.copy(camera.position);
+      u.uInvProj.value.copy(camera.projectionMatrix).invert();
+      u.uCamToWorld.value.copy(camera.matrixWorld);
+      graph.updateMatrixWorld();
