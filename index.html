@@ -2268,3 +2268,13 @@
     }
 
     shapeBtns.forEach((btn) => btn.addEventListener('click', () => switchShape(parseInt(btn.dataset.shape, 10))));
+
+    function hex3(v) { const h = new THREE.Color(v); return new THREE.Vector3(h.r, h.g, h.b); }
+    function stopHex(v) { return '#' + new THREE.Color(v.x, v.y, v.z).getHexString(); }
+
+    function realStops() {
+      return morphMat.uniforms.uPalStops.value.slice(0, morphMat.uniforms.uPalStopCount.value);
+    }
+    function setStops(stops) {
+      morphMat.uniforms.uPalStops.value = padPalStops(stops);
+      morphMat.uniforms.uPalStopCount.value = Math.min(stops.length, PAL_STOPS_MAX);
