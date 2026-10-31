@@ -2318,3 +2318,13 @@
     });
 
     let mirAxis = -1;
+    const mirBtns = [mirX, mirY, mirZ];
+    function applyMirror() {
+      const on = mirAxis >= 0;
+      mirrorMat.uniforms.uMirrorAxis.value = on ? mirAxis : 0;
+      mirrorGlintsMat.uniforms.uMirrorAxis.value = on ? mirAxis : 0;
+      mirrorMesh.visible = on;
+      mirrorGlintsMesh.visible = on && glintsOn;
+      mirBtns.forEach((b, i) => b.classList.toggle('active', i === mirAxis));
+    }
+    mirBtns.forEach((b, i) => b.addEventListener('click', () => { mirAxis = (mirAxis === i) ? -1 : i; applyMirror(); }));
