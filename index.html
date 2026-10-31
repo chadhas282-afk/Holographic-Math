@@ -2338,3 +2338,12 @@
     dofFocusBtn.addEventListener('click', () => { dofFocusOn = !dofFocusOn; dofFocusBtn.classList.toggle('active', dofFocusOn); });
     let filmOn = true;
     filmBtn.addEventListener('click', () => {
+      filmOn = !filmOn;
+      filmPass.enabled = filmOn;
+      filmBtn.classList.toggle('active', filmOn);
+      filmRows.forEach(r => { r.style.display = filmOn ? 'flex' : 'none'; });
+    });
+    let reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    reducedMotionBtn.classList.toggle('active', reducedMotion);
+    reducedMotionBtn.addEventListener('click', () => { reducedMotion = !reducedMotion; reducedMotionBtn.classList.toggle('active', reducedMotion); });
+    lodBtn.addEventListener('click', () => { lodEnabled = !lodEnabled; lodBtn.classList.toggle('active', lodEnabled); });
