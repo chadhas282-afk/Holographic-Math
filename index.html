@@ -2558,3 +2558,13 @@
         const finalPos = base.add(wig.mul(amt));
         const pos = posNode.element(i);
         pos.x = finalPos.x; pos.y = finalPos.y; pos.z = finalPos.z;
+        })().compute(n);
+
+      await r.computeAsync(kernel);
+      const testBuf = await r.getArrayBufferAsync(posNode.value);
+      const testArr = readVec3Storage(testBuf, n);
+      for (let i = 0; i < testArr.length; i += 997) {
+        if (!Number.isFinite(testArr[i])) throw new Error('compute produced non-finite values');
+      }
+
+      gpuRenderer = r; gpuKernel = kernel; gpuPosNode = posNode;
