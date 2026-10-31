@@ -2458,3 +2458,13 @@
     updateSdfColors();
 
     volumetricBtn.addEventListener('click', () => {
+      volumetricOn = !volumetricOn;
+      volumetricBtn.classList.toggle('active', volumetricOn);
+      volumetricPass.enabled = volumetricOn;
+    });
+
+    let sdfMode = 0, sdfAlpha = 0;
+    function sdfTargetMode(shapeIdx) { return shapeIdx === 0 ? 1 : shapeIdx === 2 ? 2 : 0; }
+    function updateSdfVolume(dt) {
+      if (!volumetricOn) return;
+      const want = sdfTargetMode(currentShape);
