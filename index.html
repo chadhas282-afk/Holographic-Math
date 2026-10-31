@@ -2328,3 +2328,13 @@
       mirBtns.forEach((b, i) => b.classList.toggle('active', i === mirAxis));
     }
     mirBtns.forEach((b, i) => b.addEventListener('click', () => { mirAxis = (mirAxis === i) ? -1 : i; applyMirror(); }));
+
+    let curlOn = true;
+    curlBtn.addEventListener('click', () => { curlOn = !curlOn; curlBtn.classList.toggle('active', curlOn); });
+    let aoOn = false;
+    aoBtn.addEventListener('click', () => { aoOn = !aoOn; morphMat.uniforms.uAO.value = aoOn ? 1 : 0; aoBtn.classList.toggle('active', aoOn); });
+    let dofOn = false, dofFocusOn = false;
+    dofBtn.addEventListener('click', () => { dofOn = !dofOn; bokehPass.enabled = dofOn; dofBtn.classList.toggle('active', dofOn); });
+    dofFocusBtn.addEventListener('click', () => { dofFocusOn = !dofFocusOn; dofFocusBtn.classList.toggle('active', dofFocusOn); });
+    let filmOn = true;
+    filmBtn.addEventListener('click', () => {
