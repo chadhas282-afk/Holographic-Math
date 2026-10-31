@@ -2288,3 +2288,13 @@
       container.innerHTML = '';
       realStops().forEach((stop, i) => {
         const input = document.createElement('input');
+        input.type = 'color';
+        input.value = stopHex(stop);
+        input.title = 'stop ' + (i + 1);
+        input.addEventListener('input', applyCustomPalette);
+        container.appendChild(input);
+      });
+    }
+    $('palAddStop').addEventListener('click', () => {
+      const stops = realStops();
+      if (stops.length >= PAL_STOPS_MAX) return;
