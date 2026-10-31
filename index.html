@@ -2308,3 +2308,13 @@
       rebuildPalStopsUI();
     });
     $('palResetStops').addEventListener('click', () => {
+      setStops([new THREE.Vector3(0.18, 0.42, 1.0), new THREE.Vector3(0.0, 0.98, 0.93), new THREE.Vector3(1.0, 0.35, 0.7)]);
+      rebuildPalStopsUI();
+    });
+    rebuildPalStopsUI();
+    paletteSel.addEventListener('change', () => {
+      morphMat.uniforms.uPalette.value = parseInt(paletteSel.value, 10);
+      palCustom.style.display = paletteSel.value === '7' ? 'flex' : 'none';
+    });
+
+    let mirAxis = -1;
