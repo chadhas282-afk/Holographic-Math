@@ -2508,3 +2508,13 @@
       }
       attr.needsUpdate = true;
     }
+    function readVec3Storage(arrayBuffer, n) {
+      const flat = new Float32Array(arrayBuffer);
+      if (flat.length === n * 4) {
+        const out = new Float32Array(n * 3);
+        for (let i = 0; i < n; i++) {
+          const s = i * 4, d = i * 3;
+          out[d] = flat[s]; out[d + 1] = flat[s + 1]; out[d + 2] = flat[s + 2];
+        }
+        return out;
+      }
