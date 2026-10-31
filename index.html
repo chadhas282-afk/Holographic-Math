@@ -2358,3 +2358,13 @@
         uCamToWorld: { value: new THREE.Matrix4() },
         uGraphInv: { value: new THREE.Matrix4() },
         uShapeMode: { value: 0 },
+        uShapeAlpha: { value: 0 },
+        uCoreColor: { value: new THREE.Vector3(0.05, 0.10, 0.20) },
+        uGlowColor: { value: new THREE.Vector3(0.55, 0.85, 1.0) },
+      },
+      vertexShader: 'varying vec2 vUv;\nvoid main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: [
+        'precision highp float;',
+        'varying vec2 vUv;',
+        'uniform sampler2D tDiffuse;',
+        'uniform float uTime;',
