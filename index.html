@@ -2298,3 +2298,13 @@
     $('palAddStop').addEventListener('click', () => {
       const stops = realStops();
       if (stops.length >= PAL_STOPS_MAX) return;
+      setStops(stops.concat([stops[stops.length - 1].clone()]));
+      rebuildPalStopsUI();
+    });
+    $('palRemoveStop').addEventListener('click', () => {
+      const stops = realStops();
+      if (stops.length <= 2) return;
+      setStops(stops.slice(0, -1));
+      rebuildPalStopsUI();
+    });
+    $('palResetStops').addEventListener('click', () => {
