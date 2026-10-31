@@ -2278,3 +2278,13 @@
     function setStops(stops) {
       morphMat.uniforms.uPalStops.value = padPalStops(stops);
       morphMat.uniforms.uPalStopCount.value = Math.min(stops.length, PAL_STOPS_MAX);
+      }
+    function applyCustomPalette() {
+      const inputs = document.querySelectorAll('#palStops input[type="color"]');
+      setStops(Array.from(inputs).map(i => hex3(i.value)));
+    }
+    function rebuildPalStopsUI() {
+      const container = $('palStops');
+      container.innerHTML = '';
+      realStops().forEach((stop, i) => {
+        const input = document.createElement('input');
