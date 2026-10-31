@@ -2539,3 +2539,12 @@
       const posNode = instancedArray(n, 'vec3');
       const uProgress = uniform(0);
       const uTime = uniform(0);
+
+      const kernel = Fn(() => {
+        const i = instanceIndex;
+        const from = fromNode.element(i);
+        const to = toNode.element(i);
+        const rnd = randNode.element(i);
+        const lp = clamp(uProgress.sub(rnd.y.mul(0.4)).div(0.6), 0.0, 1.0);
+        const smoothLp = lp.mul(lp).mul(float(3.0).sub(lp.mul(2.0)));
+        const base = mix(from, to, smoothLp);
