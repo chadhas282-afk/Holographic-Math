@@ -2518,3 +2518,13 @@
         }
         return out;
       }
+      if (flat.length === n * 3) return flat;
+      throw new Error('unexpected readback length ' + flat.length + ' (wanted ' + (n * 3) + ' or ' + (n * 4) + ')');
+    }
+
+    async function initGpuPhysics() {
+      if (!('gpu' in navigator) && !window.WebGLRenderingContext) {
+        throw new Error('no GPU context available in this browser');
+      }
+      const { WebGPURenderer } = await import('three/webgpu');
+      const { Fn, instanceIndex, instancedArray, uniform, float, clamp, mix, sin, smoothstep } = await import('three/tsl');
