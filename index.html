@@ -2488,3 +2488,13 @@
 
     function disposeGpuPhysics() {
       gpuPhysicsReady = false;
+      morphMat.uniforms.uUseExternal.value = 0;
+      if (gpuRenderer) { try { gpuRenderer.dispose(); } catch (e) { } }
+      gpuRenderer = null; gpuKernel = null; gpuPosNode = null;
+      gpuFromNode = null; gpuToNode = null; gpuRandNode = null; gpuUProgress = null; gpuUTime = null;
+    }
+
+    function writeVec3Storage(node, srcArr) {
+      const attr = node.value;
+      const n = srcArr.length / 3;
+      if (attr.itemSize === 4) {
