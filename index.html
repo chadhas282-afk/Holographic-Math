@@ -2548,3 +2548,13 @@
         const lp = clamp(uProgress.sub(rnd.y.mul(0.4)).div(0.6), 0.0, 1.0);
         const smoothLp = lp.mul(lp).mul(float(3.0).sub(lp.mul(2.0)));
         const base = mix(from, to, smoothLp);
+        const n1 = sin(uTime.mul(1.4).add(rnd.x.mul(12.9898)));
+        const n2 = sin(uTime.mul(0.9).add(rnd.y.mul(78.233)));
+        const n3 = sin(uTime.mul(1.7).add(rnd.z.mul(37.719)));
+        const noise = n1.add(n2).add(n3).mul(0.3333);
+        const sway = smoothstep(0.0, 0.15, lp).mul(float(1.0).sub(smoothstep(0.85, 1.0, lp)));
+        const wig = rnd.mul(2.0).sub(1.0);
+        const amt = noise.mul(0.016).add(sway.mul(0.06));
+        const finalPos = base.add(wig.mul(amt));
+        const pos = posNode.element(i);
+        pos.x = finalPos.x; pos.y = finalPos.y; pos.z = finalPos.z;
