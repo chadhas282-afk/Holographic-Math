@@ -2347,3 +2347,14 @@
     reducedMotionBtn.classList.toggle('active', reducedMotion);
     reducedMotionBtn.addEventListener('click', () => { reducedMotion = !reducedMotion; reducedMotionBtn.classList.toggle('active', reducedMotion); });
     lodBtn.addEventListener('click', () => { lodEnabled = !lodEnabled; lodBtn.classList.toggle('active', lodEnabled); });
+
+    let volumetricOn = false;
+    const sdfVolumeShader = {
+      uniforms: {
+        tDiffuse: { value: null },
+        uTime: { value: 0 },
+        uCameraPos: { value: new THREE.Vector3() },
+        uInvProj: { value: new THREE.Matrix4() },
+        uCamToWorld: { value: new THREE.Matrix4() },
+        uGraphInv: { value: new THREE.Matrix4() },
+        uShapeMode: { value: 0 },
