@@ -2498,3 +2498,13 @@
       const attr = node.value;
       const n = srcArr.length / 3;
       if (attr.itemSize === 4) {
+        const dst = attr.array;
+        for (let i = 0; i < n; i++) {
+          const s = i * 3, d = i * 4;
+          dst[d] = srcArr[s]; dst[d + 1] = srcArr[s + 1]; dst[d + 2] = srcArr[s + 2];
+        }
+      } else {
+        attr.array.set(srcArr);
+      }
+      attr.needsUpdate = true;
+    }
