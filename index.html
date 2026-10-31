@@ -2478,3 +2478,13 @@
       u.uInvProj.value.copy(camera.projectionMatrix).invert();
       u.uCamToWorld.value.copy(camera.matrixWorld);
       graph.updateMatrixWorld();
+      u.uGraphInv.value.copy(graph.matrixWorld).invert();
+    }
+
+    let gpuPhysicsOn = false, gpuPhysicsReady = false, gpuBusy = false;
+    let gpuRenderer = null, gpuKernel = null, gpuPosNode = null;
+    let gpuFromNode = null, gpuToNode = null, gpuRandNode = null, gpuUProgress = null, gpuUTime = null;
+    let gpuN = 0;
+
+    function disposeGpuPhysics() {
+      gpuPhysicsReady = false;
