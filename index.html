@@ -2798,3 +2798,13 @@
       if (!b) return;
       const target = (lastEqField === eq2 && !eq2.disabled) ? eq2 : eqInput;
       const text = b.dataset.ins;
+       const start = target.selectionStart ?? target.value.length;
+      const end = target.selectionEnd ?? target.value.length;
+      target.value = target.value.slice(0, start) + text + target.value.slice(end);
+      target.setSelectionRange(start + text.length, start + text.length);
+      target.focus();
+      if (target === eq2) renderEq2(); else renderEquation(true);
+    });
+
+    let playlist = [], playIndex = 0, playLoop = false;
+    function renderPlaylist() {
