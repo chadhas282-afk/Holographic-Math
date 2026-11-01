@@ -2638,3 +2638,13 @@
 
     function vecFieldColor(t) {
       const c0 = [0.15, 0.45, 0.95], c1 = [0.15, 0.95, 0.75], c2 = [1.0, 0.75, 0.15];
+      if (t < 0.5) { const u = t / 0.5; return [c0[0] + (c1[0] - c0[0]) * u, c0[1] + (c1[1] - c0[1]) * u, c0[2] + (c1[2] - c0[2]) * u]; }
+      const u = (t - 0.5) / 0.5; return [c1[0] + (c2[0] - c1[0]) * u, c1[1] + (c2[1] - c1[1]) * u, c1[2] + (c2[2] - c1[2]) * u];
+    }
+
+    function buildGradientField(expr, t) {
+      const trimmed = normalizeExpr(expr);
+      const ei = findTopLevelEqual(trimmed);
+      if (ei < 0 || trimmed.slice(0, ei).trim() !== 'z') throw new Error('needs a surface equation, e.g. z = sin(x)*cos(y)');
+      const code = trimmed.slice(ei + 1).trim();
+      const aCode = '(' + CONFIG.A.toFixed(4) + ')', bCode = '(' + CONFIG.B.toFixed(4) + ')';
