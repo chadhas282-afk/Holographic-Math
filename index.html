@@ -2848,3 +2848,13 @@
     }
     camSel.addEventListener('change', () => {
       camMode = parseInt(camSel.value, 10);
+       if (camMode === 0) {
+        camera.position.copy(camStartPos);
+        camera.lookAt(0, 0, 0);
+        controls.target.set(0, 0, 0);
+      }
+      controls.enabled = camMode === 0;
+    });
+
+    let helpSeen = false;
+    try { helpSeen = localStorage.getItem('holoHelpSeen') === '1'; } catch (e) { }
