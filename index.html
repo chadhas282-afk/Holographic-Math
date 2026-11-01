@@ -2658,3 +2658,13 @@
           const x = -B + (2 * B) * (i + 0.5) / N, y = -B + (2 * B) * (j + 0.5) / N;
           const gx = (fn(x + h, y, 0, 0, 0, t) - fn(x - h, y, 0, 0, 0, t)) / (2 * h);
           const gy = (fn(x, y + h, 0, 0, 0, t) - fn(x, y - h, 0, 0, 0, t)) / (2 * h);
+          if (!Number.isFinite(gx) || !Number.isFinite(gy)) continue;
+          const mag = Math.hypot(gx, gy);
+          if (mag > maxMag) maxMag = mag;
+          cells.push([x, y, gx, gy, mag]);
+        }
+      }
+      if (!cells.length) throw new Error('gradient is undefined everywhere on this domain');
+      const scale = 0.9 / maxMag;
+      const positions = [], colors = [];
+      for (const [x, y, gx, gy, mag] of cells) {
