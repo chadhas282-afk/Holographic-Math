@@ -2767,3 +2767,14 @@
       mirrorGlintsMesh.visible = glintsOn && mirAxis >= 0;
       glintsBtn.classList.toggle('active', glintsOn);
     });
+
+    let paramTimer = null;
+    function onParamChange() {
+      clearTimeout(paramTimer);
+      paramTimer = setTimeout(() => {
+        if (currentShape === 4 && lastExpr && !liveActive) startExpr(lastExpr, true, null);
+        if (layerOn && lastExpr2 && !liveActive2) renderEq2();
+      }, 90);
+    }
+    function wireParamSlider(slider, out, key) {
+      out.textContent = parseFloat(slider.value).toFixed(2);
