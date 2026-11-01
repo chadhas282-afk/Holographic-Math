@@ -2698,3 +2698,13 @@
     vecFieldBtn.addEventListener('click', () => {
       vecFieldOn = !vecFieldOn;
       vecFieldBtn.classList.toggle('active', vecFieldOn);
+      if (vecFieldOn) rebuildVectorField(); else vecFieldMesh.visible = false;
+    });
+
+    let spatialLodOn = false;
+    const SPATIAL_GRID_N = 3, SPATIAL_GRID_B = 3.5;
+    const _spatialCellCenter = new THREE.Vector3();
+    const _spatialCamLocal = new THREE.Vector3();
+    const _spatialGraphInv = new THREE.Matrix4();
+    function spatialCellLodFactor(dist) {
+      if (dist > 9) return 0.15;
