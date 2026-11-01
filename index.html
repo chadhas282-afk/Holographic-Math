@@ -2627,3 +2627,14 @@
         eqHint.textContent = 'WebGPU compute unavailable: ' + (err && err.message || err);
       }
     });
+
+    let vecFieldOn = false;
+    const vecFieldGeo = new THREE.BufferGeometry();
+    const vecFieldMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false });
+    const vecFieldMesh = new THREE.LineSegments(vecFieldGeo, vecFieldMat);
+    vecFieldMesh.visible = false;
+    vecFieldMesh.frustumCulled = false;
+    graph.add(vecFieldMesh);
+
+    function vecFieldColor(t) {
+      const c0 = [0.15, 0.45, 0.95], c1 = [0.15, 0.95, 0.75], c2 = [1.0, 0.75, 0.15];
