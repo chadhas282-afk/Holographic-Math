@@ -2678,3 +2678,13 @@
         positions.push(ex, ey, 0, ex + Math.cos(a2) * headLen, ey + Math.sin(a2) * headLen, 0);
         const col = vecFieldColor(Math.min(1, mag / maxMag));
         for (let v = 0; v < 6; v++) colors.push(col[0], col[1], col[2]);
+        }
+      return { positions: new Float32Array(positions), colors: new Float32Array(colors) };
+    }
+
+    function rebuildVectorField() {
+      if (!vecFieldOn) return;
+      if (currentShape !== 4 || !lastExpr) { vecFieldMesh.visible = false; return; }
+      try {
+        const { positions, colors } = buildGradientField(lastExpr, clock ? clock.elapsedTime : 0);
+        vecFieldGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
