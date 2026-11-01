@@ -2588,3 +2588,13 @@
         if (arr.length === aGpuPos.length) {
           aGpuPos.set(arr);
           morphGeo.attributes.aGpuPos.needsUpdate = true;
+          }
+      } catch (err) {
+        console.warn('[GPU Physics] step failed, reverting to CPU/vertex-shader physics:', err);
+        gpuPhysicsOn = false;
+        gpuPhysicsBtn.classList.remove('active');
+        gpuPhysicsBtn.textContent = 'GPU Phys';
+        eqHint.textContent = 'GPU physics stopped: ' + (err && err.message || err);
+        disposeGpuPhysics();
+      } finally {
+        gpuBusy = false;
