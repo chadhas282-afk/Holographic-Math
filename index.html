@@ -2808,3 +2808,13 @@
 
     let playlist = [], playIndex = 0, playLoop = false;
     function renderPlaylist() {
+    if (playlist.length === 0) { plLabel.textContent = 'shapes blend one after another'; return; }
+      plLabel.textContent = (playLoop ? 'LOOP: ' : '') + playlist.map(n => SHAPES[n].name).join('  →  ');
+    }
+    plAdd.addEventListener('click', () => {
+      if (currentShape === 4) { plLabel.textContent = 'queue works on the 4 preset shapes'; return; }
+      playlist.push(currentShape);
+      if (playlist.length > 1) { playLoop = true; plLoop.classList.add('active'); }
+      renderPlaylist();
+    });
+    plLoop.addEventListener('click', () => {
