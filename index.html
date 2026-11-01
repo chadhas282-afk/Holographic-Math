@@ -2818,3 +2818,13 @@
       renderPlaylist();
     });
     plLoop.addEventListener('click', () => {
+    if (playlist.length < 2) { plLabel.textContent = 'queue at least 2 shapes, then press Loop'; return; }
+      playLoop = !playLoop;
+      plLoop.classList.toggle('active', playLoop);
+      playIndex = 0;
+      renderPlaylist();
+    });
+    plClear.addEventListener('click', () => {
+      playlist = []; playIndex = 0; playLoop = false;
+      plLoop.classList.remove('active');
+      renderPlaylist();
