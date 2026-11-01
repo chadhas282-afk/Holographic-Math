@@ -2688,3 +2688,13 @@
       try {
         const { positions, colors } = buildGradientField(lastExpr, clock ? clock.elapsedTime : 0);
         vecFieldGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+         vecFieldGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        vecFieldGeo.computeBoundingSphere();
+        vecFieldMesh.visible = true;
+      } catch (err) {
+        vecFieldMesh.visible = false;
+      }
+    }
+    vecFieldBtn.addEventListener('click', () => {
+      vecFieldOn = !vecFieldOn;
+      vecFieldBtn.classList.toggle('active', vecFieldOn);
