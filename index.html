@@ -2738,3 +2738,13 @@
       morphMat.uniforms.uSpatialLodOn.value = spatialLodOn ? 1 : 0;
       if (spatialLodOn) updateSpatialLod();
       else morphMat.uniforms.uCellLod.value.fill(1.0);
+      });
+
+    function bindFilm(input, out, uniform, digits) {
+      input.addEventListener('input', () => {
+        const v = parseFloat(input.value);
+        out.textContent = v.toFixed(digits);
+        filmPass.uniforms[uniform].value = v;
+      });
+    }
+    bindFilm(filmChrom, filmChromVal, 'uChromAberr', 1);
