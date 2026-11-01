@@ -2788,3 +2788,13 @@
     wireParamSlider(bSlider, bVal, 'B');
     wireParamSlider(cSlider, cVal, 'C');
     wireParamSlider(kSlider, kVal, 'K');
+
+    let lastEqField = eqInput;
+    eqInput.addEventListener('focus', () => { lastEqField = eqInput; });
+    eq2.addEventListener('focus', () => { lastEqField = eq2; });
+    constButtons.addEventListener('mousedown', (e) => e.preventDefault());
+    constButtons.addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-ins]');
+      if (!b) return;
+      const target = (lastEqField === eq2 && !eq2.disabled) ? eq2 : eqInput;
+      const text = b.dataset.ins;
