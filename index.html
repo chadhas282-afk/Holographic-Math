@@ -2728,3 +2728,13 @@
             _spatialCellCenter.set(cx, cy, cz);
             const dist = _spatialCellCenter.distanceTo(_spatialCamLocal);
             arr[ix + iy * 3 + iz * 9] = spatialCellLodFactor(dist);
+            }
+        }
+      }
+    }
+    spatialLodBtn.addEventListener('click', () => {
+      spatialLodOn = !spatialLodOn;
+      spatialLodBtn.classList.toggle('active', spatialLodOn);
+      morphMat.uniforms.uSpatialLodOn.value = spatialLodOn ? 1 : 0;
+      if (spatialLodOn) updateSpatialLod();
+      else morphMat.uniforms.uCellLod.value.fill(1.0);
