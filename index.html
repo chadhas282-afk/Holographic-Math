@@ -2648,3 +2648,13 @@
       if (ei < 0 || trimmed.slice(0, ei).trim() !== 'z') throw new Error('needs a surface equation, e.g. z = sin(x)*cos(y)');
       const code = trimmed.slice(ei + 1).trim();
       const aCode = '(' + CONFIG.A.toFixed(4) + ')', bCode = '(' + CONFIG.B.toFixed(4) + ')';
+      const cCode = '(' + CONFIG.C.toFixed(4) + ')', kCode = '(' + CONFIG.K.toFixed(4) + ')';
+      const fn = cachedMake(code, aCode, bCode, cCode, kCode);
+      const N = 22, B = 3, h = 0.06;
+      const cells = [];
+      let maxMag = 1e-6;
+      for (let i = 0; i < N; i++) {
+        for (let j = 0; j < N; j++) {
+          const x = -B + (2 * B) * (i + 0.5) / N, y = -B + (2 * B) * (j + 0.5) / N;
+          const gx = (fn(x + h, y, 0, 0, 0, t) - fn(x - h, y, 0, 0, 0, t)) / (2 * h);
+          const gy = (fn(x, y + h, 0, 0, 0, t) - fn(x, y - h, 0, 0, 0, t)) / (2 * h);
