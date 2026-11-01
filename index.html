@@ -2778,3 +2778,13 @@
     }
     function wireParamSlider(slider, out, key) {
       out.textContent = parseFloat(slider.value).toFixed(2);
+      slider.addEventListener('input', () => {
+        CONFIG[key] = parseFloat(slider.value);
+        out.textContent = CONFIG[key].toFixed(2);
+        onParamChange();
+      });
+    }
+    wireParamSlider(aSlider, aVal, 'A');
+    wireParamSlider(bSlider, bVal, 'B');
+    wireParamSlider(cSlider, cVal, 'C');
+    wireParamSlider(kSlider, kVal, 'K');
