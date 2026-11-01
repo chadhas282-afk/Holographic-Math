@@ -2618,3 +2618,12 @@
         morphMat.uniforms.uUseExternal.value = 1;
         gpuPhysicsBtn.classList.add('active');
         gpuPhysicsBtn.textContent = 'GPU Phys';
+        eqHint.textContent = 'WebGPU compute active — morph physics running off the CPU (beta)';
+      } catch (err) {
+        console.warn('[GPU Physics] init failed, staying on CPU/vertex-shader physics:', err);
+        disposeGpuPhysics();
+        gpuPhysicsBtn.classList.remove('active');
+        gpuPhysicsBtn.textContent = 'GPU Phys';
+        eqHint.textContent = 'WebGPU compute unavailable: ' + (err && err.message || err);
+      }
+    });
