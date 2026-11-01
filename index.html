@@ -2858,3 +2858,13 @@
 
     let helpSeen = false;
     try { helpSeen = localStorage.getItem('holoHelpSeen') === '1'; } catch (e) { }
+    helpBtn.addEventListener('click', () => helpModal.classList.add('show'));
+    function closeHelp(remember) {
+      helpModal.classList.remove('show');
+      if (remember) { try { localStorage.setItem('holoHelpSeen', '1'); } catch (e) { } helpSeen = true; }
+    }
+    helpGot.addEventListener('click', () => closeHelp(false));
+    helpSkip.addEventListener('click', () => closeHelp(true));
+    helpModal.addEventListener('click', (e) => { if (e.target === helpModal) closeHelp(false); });
+
+    pauseBtn.addEventListener('click', () => {
