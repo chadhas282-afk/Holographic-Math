@@ -2708,3 +2708,13 @@
     const _spatialGraphInv = new THREE.Matrix4();
     function spatialCellLodFactor(dist) {
       if (dist > 9) return 0.15;
+      if (dist > 6.5) return 0.35;
+      if (dist > 4.5) return 0.6;
+      return 1.0;
+    }
+    function updateSpatialLod() {
+      if (!spatialLodOn) return;
+      graph.updateMatrixWorld();
+      _spatialGraphInv.copy(graph.matrixWorld).invert();
+      _spatialCamLocal.copy(camera.position).applyMatrix4(_spatialGraphInv);
+      const cellSize = (2 * SPATIAL_GRID_B) / SPATIAL_GRID_N;
