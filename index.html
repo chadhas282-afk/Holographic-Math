@@ -2828,3 +2828,13 @@
       playlist = []; playIndex = 0; playLoop = false;
       plLoop.classList.remove('active');
       renderPlaylist();
+       });
+
+    let camMode = 0;
+    const camStartPos = camera.position.clone();
+    camera.lookAt(0, 0, 0);
+    function cinema(t) {
+      if (camMode === 1) {
+        camera.position.set(Math.sin(t * 0.16) * 7.2, 1.6, Math.cos(t * 0.16) * 7.2);
+        camera.lookAt(0, 0, 0);
+      } else if (camMode === 2) {
