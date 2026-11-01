@@ -2568,3 +2568,13 @@
       }
 
       gpuRenderer = r; gpuKernel = kernel; gpuPosNode = posNode;
+      gpuFromNode = fromNode; gpuToNode = toNode; gpuRandNode = randNode;
+      gpuUProgress = uProgress; gpuUTime = uTime;
+      gpuN = n;
+      gpuPhysicsReady = true;
+    }
+
+    async function stepGpuPhysics(progressVal, timeVal) {
+      if (!gpuPhysicsReady || gpuBusy || gpuN !== geomN) return;
+      gpuBusy = true;
+      try {
