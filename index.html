@@ -2668,3 +2668,13 @@
       const scale = 0.9 / maxMag;
       const positions = [], colors = [];
       for (const [x, y, gx, gy, mag] of cells) {
+      const len = Math.max(0.05, Math.min(0.5, mag * scale));
+        const ang = Math.atan2(gy, gx);
+        const ex = x + Math.cos(ang) * len, ey = y + Math.sin(ang) * len;
+        const headLen = len * 0.34;
+        const a1 = ang + Math.PI * 0.82, a2 = ang - Math.PI * 0.82;
+        positions.push(x, y, 0, ex, ey, 0);
+        positions.push(ex, ey, 0, ex + Math.cos(a1) * headLen, ey + Math.sin(a1) * headLen, 0);
+        positions.push(ex, ey, 0, ex + Math.cos(a2) * headLen, ey + Math.sin(a2) * headLen, 0);
+        const col = vecFieldColor(Math.min(1, mag / maxMag));
+        for (let v = 0; v < 6; v++) colors.push(col[0], col[1], col[2]);
