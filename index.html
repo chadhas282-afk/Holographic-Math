@@ -2598,3 +2598,13 @@
         disposeGpuPhysics();
       } finally {
         gpuBusy = false;
+        }
+    }
+
+    onGeoRealloc = () => { if (gpuPhysicsOn) { disposeGpuPhysics(); gpuPhysicsBtn.classList.remove('active'); gpuPhysicsBtn.textContent = 'GPU Phys'; gpuPhysicsOn = false; eqHint.textContent = 'GPU physics reset (particle count changed) — click GPU Phys to restart it'; } };
+
+    gpuPhysicsBtn.addEventListener('click', async () => {
+      if (gpuPhysicsOn) {
+        gpuPhysicsOn = false;
+        gpuPhysicsBtn.classList.remove('active');
+        gpuPhysicsBtn.textContent = 'GPU Phys';
