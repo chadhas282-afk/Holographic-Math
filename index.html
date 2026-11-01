@@ -2838,3 +2838,13 @@
         camera.position.set(Math.sin(t * 0.16) * 7.2, 1.6, Math.cos(t * 0.16) * 7.2);
         camera.lookAt(0, 0, 0);
       } else if (camMode === 2) {
+      camera.position.set(Math.sin(t * 0.1) * 8.4, 4.5 + Math.sin(t * 0.22) * 1.8, Math.cos(t * 0.1) * 8.4);
+        camera.lookAt(0, 0, 0);
+      } else if (camMode === 3) {
+        const ph = t * 0.16;
+        camera.position.set(Math.sin(ph) * 9.0, 0.6 + Math.sin(t * 0.08) * 3.0, Math.cos(ph) * 9.0);
+        camera.lookAt(0, 0, 0);
+      }
+    }
+    camSel.addEventListener('change', () => {
+      camMode = parseInt(camSel.value, 10);
