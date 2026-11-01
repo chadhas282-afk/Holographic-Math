@@ -2718,3 +2718,13 @@
       _spatialGraphInv.copy(graph.matrixWorld).invert();
       _spatialCamLocal.copy(camera.position).applyMatrix4(_spatialGraphInv);
       const cellSize = (2 * SPATIAL_GRID_B) / SPATIAL_GRID_N;
+      const arr = morphMat.uniforms.uCellLod.value;
+      for (let ix = 0; ix < SPATIAL_GRID_N; ix++) {
+        for (let iy = 0; iy < SPATIAL_GRID_N; iy++) {
+          for (let iz = 0; iz < SPATIAL_GRID_N; iz++) {
+            const cx = -SPATIAL_GRID_B + cellSize * (ix + 0.5);
+            const cy = -SPATIAL_GRID_B + cellSize * (iy + 0.5);
+            const cz = -SPATIAL_GRID_B + cellSize * (iz + 0.5);
+            _spatialCellCenter.set(cx, cy, cz);
+            const dist = _spatialCellCenter.distanceTo(_spatialCamLocal);
+            arr[ix + iy * 3 + iz * 9] = spatialCellLodFactor(dist);
