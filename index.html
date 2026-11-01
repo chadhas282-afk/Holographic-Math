@@ -2608,3 +2608,13 @@
         gpuPhysicsOn = false;
         gpuPhysicsBtn.classList.remove('active');
         gpuPhysicsBtn.textContent = 'GPU Phys';
+        disposeGpuPhysics();
+        return;
+      }
+      gpuPhysicsBtn.textContent = 'Connecting…';
+      try {
+        await initGpuPhysics();
+        gpuPhysicsOn = true;
+        morphMat.uniforms.uUseExternal.value = 1;
+        gpuPhysicsBtn.classList.add('active');
+        gpuPhysicsBtn.textContent = 'GPU Phys';
