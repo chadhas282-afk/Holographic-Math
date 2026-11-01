@@ -2748,3 +2748,12 @@
       });
     }
     bindFilm(filmChrom, filmChromVal, 'uChromAberr', 1);
+    bindFilm(filmVignette, filmVignetteVal, 'uVignette', 2);
+    bindFilm(filmGrain, filmGrainVal, 'uGrain', 2);
+    bindFilm(filmSat, filmSatVal, 'uSaturation', 2);
+    bindFilm(filmContrast, filmContrastVal, 'uContrast', 2);
+    filmTone.addEventListener('change', () => { filmPass.uniforms.uToneMap.value = parseInt(filmTone.value, 10); });
+
+    sizeSlider.addEventListener('input', () => { const v = parseFloat(sizeSlider.value); sizeVal.textContent = v.toFixed(2); CONFIG.POINT_SIZE = v; });
+    glowSlider.addEventListener('input', () => { const v = parseFloat(glowSlider.value); glowVal.textContent = v.toFixed(1); bloomPass.strength = v; });
+    countSlider.addEventListener('input', () => setCount(parseInt(countSlider.value, 10)));
