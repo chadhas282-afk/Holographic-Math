@@ -2578,3 +2578,13 @@
       if (!gpuPhysicsReady || gpuBusy || gpuN !== geomN) return;
       gpuBusy = true;
       try {
+      writeVec3Storage(gpuFromNode, aFrom);
+        writeVec3Storage(gpuToNode, aTo);
+        gpuUProgress.value = progressVal;
+        gpuUTime.value = timeVal;
+        await gpuRenderer.computeAsync(gpuKernel);
+        const buf = await gpuRenderer.getArrayBufferAsync(gpuPosNode.value);
+        const arr = readVec3Storage(buf, gpuN);
+        if (arr.length === aGpuPos.length) {
+          aGpuPos.set(arr);
+          morphGeo.attributes.aGpuPos.needsUpdate = true;
