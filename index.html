@@ -3068,3 +3068,12 @@
 
     function evaluateLive() {
       const now = clock.elapsedTime;
+      if (liveActive && currentShape === 4 && now - lastLiveSent > 0.045 && !chans[1].busy) {
+        lastLiveSent = now;
+        runEval(1, { seq: ++seq, expr: lastExpr, count: geomN, t: now, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
+      }
+      if (layerOn && liveActive2 && now - lastLiveSent2 > 0.045 && !chans[2].busy) {
+        lastLiveSent2 = now;
+        runEval(2, { seq: ++seq2, expr: lastExpr2, count: geomN2, t: now, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
+      }
+    }
