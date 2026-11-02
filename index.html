@@ -3098,3 +3098,13 @@
     }
 
     function animate() {
+      requestAnimationFrame(animate);
+      const now = performance.now();
+      tickFps(now);
+      const dt = Math.min(clock.getDelta(), 0.05);
+      const t = clock.elapsedTime;
+
+      evaluateLive();
+      if (gpuPhysicsOn) stepGpuPhysics((paused || morphing) ? progress : 0, t);
+
+      if (morphing && !paused) {
