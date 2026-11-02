@@ -2998,3 +2998,13 @@
 
     let frames = 0, lastFpsT = performance.now();
     let qualityCooldown = 4000;
+    let lodHidden = false;
+    const targetCount = () => parseInt(countSlider.value, 10);
+    function tickFps(now) {
+      frames++;
+      const el = now - lastFpsT;
+      if (el < 500) return;
+      const fps = Math.round(frames * 1000 / el);
+      frames = 0; lastFpsT = now;
+      if (document.hidden) return;
+      if (fps < 40 && !lodHidden) { lodHidden = true; glintsMesh.visible = false; starGroup.visible = false; }
