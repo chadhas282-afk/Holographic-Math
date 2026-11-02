@@ -3117,3 +3117,14 @@
         if (el >= 1) { swayPulseOn = false; morphMat.uniforms.uSway.value = 0; }
         else morphMat.uniforms.uSway.value = Math.sin(el * Math.PI);
       }
+
+       const u = morphMat.uniforms;
+      u.uProgress.value = (paused || morphing) ? progress : 0;
+      u.uTime.value = t;
+      u.uCurl.value = curlOn && (morphing || paused) ? Math.sin(progress * Math.PI) : 0;
+      u.uSize.value = (morphing ? 1 + 0.35 * Math.sin(progress * Math.PI) : 1) * CONFIG.POINT_SIZE * getLodFactor();
+      skyMat.uniforms.uTime.value = t * 0.4;
+      starMat.uniforms.uTime.value = t;
+      filmPass.uniforms.uTime.value = t;
+      sdfVolumeShader.uniforms.uTime.value = t;
+      updateSdfVolume(dt);
