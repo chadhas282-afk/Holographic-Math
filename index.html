@@ -3047,3 +3047,14 @@
       }
     }
     function onPtrUp() { targetActive = 0; }
+
+    let lastTouchTime = 0, lastTouchX = 0, lastTouchY = 0;
+    renderer.domElement.addEventListener('touchend', (e) => {
+      const now = performance.now();
+      const touch = e.changedTouches[0];
+      if (now - lastTouchTime < 300 && Math.hypot(touch.clientX - lastTouchX, touch.clientY - lastTouchY) < 20) {
+        doSurprise();
+        e.preventDefault();
+      }
+      lastTouchTime = now; lastTouchX = touch.clientX; lastTouchY = touch.clientY;
+      onPtrUp();
