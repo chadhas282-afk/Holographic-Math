@@ -2918,3 +2918,13 @@
       'z = sin(x*x + y*y)', '[ (2+cos(v))*cos(u), (2+cos(v))*sin(u), sin(v) ]', 'r = 3*sin(3*θ)', 'r = 4*(1 + cos(θ))',
       'x^2 + y^2 + z^2 - 4 = 0', '(sqrt(x*x + y*y) - 2)^2 + z*z - 0.5 = 0', 'z = x*x/4 - y*y/4', 'r = 4*θ',
       'x^2 + y^2 - 4 = 0', 'z = sin(3*x)*cos(2*y)', 'd/dt = [10*(y-x), x*(28-z)-y, x*y-8/3*z]',
+      'd/dt = [sin(y)-0.208186*x, sin(z)-0.208186*y, sin(x)-0.208186*z]',
+      'd/dt = [-1.4*x-4*y-4*z-y*y, -1.4*y-4*z-4*x-z*z, -1.4*z-4*x-4*y-x*x]',
+      'd/dt = [15.6*(y-0.286*x+0.2145*(abs(x+1)-abs(x-1))), x-y+z, -28*y]',
+      'fourier square', 'fourier sawtooth', 'fourier triangle'
+    ];
+    let surpriseMode = false, surpriseTimer = null;
+    function doSurprise() {
+      if (Math.random() < 0.45) {
+        eqInput.value = SURPRISE_EQS[(Math.random() * SURPRISE_EQS.length) | 0];
+        renderEquation(true);
