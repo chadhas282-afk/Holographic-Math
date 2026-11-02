@@ -2958,3 +2958,13 @@
       link.click();
     });
     let mediaRecorder = null, recordedChunks = [];
+    exportWebmBtn.addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') { mediaRecorder.stop(); return; }
+      if (!renderer.domElement.captureStream || typeof MediaRecorder === 'undefined') { eqHint.textContent = 'video recording not supported in this browser'; return; }
+      const stream = renderer.domElement.captureStream(60);
+      const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+      mediaRecorder.ondataavailable = (e) => { if (e.data.size) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        const url = URL.createObjectURL(new Blob(recordedChunks, { type: 'video/webm' }));
