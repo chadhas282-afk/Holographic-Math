@@ -2938,3 +2938,13 @@
       if (Math.random() < 0.5) {
         CONFIG.A = +(Math.random() * 6 - 3).toFixed(2);
         aSlider.value = CONFIG.A;
+        aVal.textContent = CONFIG.A.toFixed(2);
+      }
+    }
+    surpriseBtn.addEventListener('click', doSurprise);
+    surpriseAuto.addEventListener('click', () => {
+      surpriseMode = !surpriseMode;
+      surpriseAuto.classList.toggle('active', surpriseMode);
+      clearInterval(surpriseTimer);
+      if (surpriseMode) surpriseTimer = setInterval(doSurprise, 4800);
+    });
