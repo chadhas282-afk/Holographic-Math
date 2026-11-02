@@ -3038,3 +3038,12 @@
     function onPtrDown(e) {
       const p = intersectMouse(e.clientX, e.clientY);
       if (p) { targetActive = 1; graph.worldToLocal(_local.copy(p)); morphMat.uniforms.uMouse.value.copy(_local); }
+       }
+    function onPtrMove(e) {
+      _lastMouseX = e.clientX; _lastMouseY = e.clientY;
+      if (targetActive > 0.5) {
+        const p = intersectMouse(e.clientX, e.clientY);
+        if (p) { graph.worldToLocal(_local.copy(p)); morphMat.uniforms.uMouse.value.copy(_local); }
+      }
+    }
+    function onPtrUp() { targetActive = 0; }
