@@ -3138,3 +3138,12 @@
       mouseActive += (targetActive - mouseActive) * 0.09;
       if (mouseActive < 0.001) mouseActive = 0;
       u.uMouseActive.value = mouseActive;
+
+      graph.rotation.y += dt * CONFIG.AUTO_SPIN * (reducedMotion ? 0.1 : 1);
+      starGroup.rotation.y += dt * CONFIG.AUTO_SPIN * 0.08 * (reducedMotion ? 0.1 : 1);
+      if (groundMesh.visible) groundMat.uniforms.uTime.value = t;
+
+      cinema(t);
+      controls.update();
+      composer.render();
+    }
