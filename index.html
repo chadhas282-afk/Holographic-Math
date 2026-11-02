@@ -2928,3 +2928,13 @@
       if (Math.random() < 0.45) {
         eqInput.value = SURPRISE_EQS[(Math.random() * SURPRISE_EQS.length) | 0];
         renderEquation(true);
+         } else {
+        switchShape((Math.random() * 4) | 0);
+      }
+      const ppl = (Math.random() * 8) | 0;
+      morphMat.uniforms.uPalette.value = ppl;
+      paletteSel.value = String(ppl);
+      palCustom.style.display = ppl === 7 ? 'flex' : 'none';
+      if (Math.random() < 0.5) {
+        CONFIG.A = +(Math.random() * 6 - 3).toFixed(2);
+        aSlider.value = CONFIG.A;
