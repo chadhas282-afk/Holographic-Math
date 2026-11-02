@@ -3108,3 +3108,12 @@
       if (gpuPhysicsOn) stepGpuPhysics((paused || morphing) ? progress : 0, t);
 
       if (morphing && !paused) {
+        progress = Math.min(1, progress + dt / CONFIG.DURATION);
+        if (progress >= 1) onMorphComplete();
+      }
+
+      if (swayPulseOn) {
+        const el = (now - swayPulseStart) / 1100;
+        if (el >= 1) { swayPulseOn = false; morphMat.uniforms.uSway.value = 0; }
+        else morphMat.uniforms.uSway.value = Math.sin(el * Math.PI);
+      }
