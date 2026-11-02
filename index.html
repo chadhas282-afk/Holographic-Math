@@ -2968,3 +2968,13 @@
       mediaRecorder.ondataavailable = (e) => { if (e.data.size) recordedChunks.push(e.data); };
       mediaRecorder.onstop = () => {
         const url = URL.createObjectURL(new Blob(recordedChunks, { type: 'video/webm' }));
+        const link = document.createElement('a');
+        link.download = 'holographic-math.webm';
+        link.href = url;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        exportWebmBtn.textContent = 'WebM';
+        exportWebmBtn.classList.remove('active');
+      };
+      mediaRecorder.start();
+      exportWebmBtn.textContent = 'Stop';
