@@ -3077,3 +3077,14 @@
         runEval(2, { seq: ++seq2, expr: lastExpr2, count: geomN2, t: now, a: CONFIG.A, b: CONFIG.B, c: CONFIG.C, k: CONFIG.K });
       }
     }
+
+    function onMorphComplete() {
+      morphing = false;
+      currentPos.set(aTo);
+      aFrom.set(aTo);
+      morphGeo.attributes.aFrom.needsUpdate = true;
+      progress = 0;
+      if (multiParts && multiParts.length > 1) {
+        clearTimeout(multiTimer);
+        multiTimer = setTimeout(() => {
+          if (!multiParts) return;
