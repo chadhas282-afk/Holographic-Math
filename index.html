@@ -2868,3 +2868,13 @@
     helpModal.addEventListener('click', (e) => { if (e.target === helpModal) closeHelp(false); });
 
     pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      pauseBtn.classList.toggle('active', paused);
+      scrub.disabled = !paused;
+      scrub.value = Math.round(progress * 100);
+      scrubVal.textContent = Math.round(progress * 100) + '%';
+    });
+    scrub.addEventListener('input', () => {
+      const p = parseInt(scrub.value, 10) / 100;
+      progress = p;
