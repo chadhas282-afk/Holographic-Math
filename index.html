@@ -2948,3 +2948,13 @@
       clearInterval(surpriseTimer);
       if (surpriseMode) surpriseTimer = setInterval(doSurprise, 4800);
     });
+    groundBtn.addEventListener('click', () => { groundMesh.visible = !groundMesh.visible; groundBtn.classList.toggle('active', groundMesh.visible); });
+
+    exportPngBtn.addEventListener('click', () => {
+      composer.render();
+      const link = document.createElement('a');
+      link.download = 'holographic-math.png';
+      link.href = renderer.domElement.toDataURL('image/png');
+      link.click();
+    });
+    let mediaRecorder = null, recordedChunks = [];
