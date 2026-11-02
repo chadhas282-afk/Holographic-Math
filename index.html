@@ -3147,3 +3147,14 @@
       controls.update();
       composer.render();
     }
+
+    function handleResize() {
+      camera.aspect = viewW() / viewH();
+      camera.updateProjectionMatrix();
+      renderer.setSize(viewW(), viewH());
+      composer.setSize(viewW(), viewH());
+      bloomPass.setSize(viewW(), viewH());
+      morphMat.uniforms.uViewportH.value = viewH();
+      starMat.uniforms.uViewportH.value = viewH();
+    }
+    window.addEventListener('resize', handleResize);
