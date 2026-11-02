@@ -2898,3 +2898,13 @@
 
     let layerOn = false;
     lay2Btn.addEventListener('click', () => {
+      layerOn = !layerOn;
+      lay2Btn.textContent = layerOn ? 'On' : 'Off';
+      eq2.disabled = !layerOn;
+      layer2Mesh.visible = layerOn;
+      if (layerOn) {
+        if (geomN2 !== geomN) allocGeoArrays2(geomN);
+        if (eq2.value.trim()) renderEq2();
+      } else {
+        liveActive2 = false;
+        eq2Hint.textContent = '2nd layer off — same forms, rendered alongside';
