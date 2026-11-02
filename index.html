@@ -3028,3 +3028,13 @@
 
     function intersectMouse(clientX, clientY) {
       const r = renderer.domElement.getBoundingClientRect();
+      _ndc.x = ((clientX - r.left) / r.width) * 2 - 1;
+      _ndc.y = -((clientY - r.top) / r.height) * 2 + 1;
+      raycaster.setFromCamera(_ndc, camera);
+      camera.getWorldDirection(_camDir);
+      attractPlane.setFromNormalAndCoplanarPoint(_camDir, graph.position);
+      return raycaster.ray.intersectPlane(attractPlane, attractPoint);
+    }
+    function onPtrDown(e) {
+      const p = intersectMouse(e.clientX, e.clientY);
+      if (p) { targetActive = 1; graph.worldToLocal(_local.copy(p)); morphMat.uniforms.uMouse.value.copy(_local); }
