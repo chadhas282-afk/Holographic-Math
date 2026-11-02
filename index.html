@@ -2888,3 +2888,13 @@
     eqInput.addEventListener('input', () => { clearTimeout(eqDebounce); eqDebounce = setTimeout(() => renderEquation(true), 350); });
     eqChips.addEventListener('click', (e) => {
       const b = e.target.closest('.chip');
+      if (!b) return;
+      eqInput.value = b.dataset.eq;
+      renderEquation(true);
+    });
+    eqGallery.addEventListener('change', () => {
+      if (eqGallery.value) { eqInput.value = eqGallery.value; renderEquation(true); }
+    });
+
+    let layerOn = false;
+    lay2Btn.addEventListener('click', () => {
