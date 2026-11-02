@@ -2878,3 +2878,13 @@
     scrub.addEventListener('input', () => {
       const p = parseInt(scrub.value, 10) / 100;
       progress = p;
+      morphMat.uniforms.uProgress.value = p;
+      scrubVal.textContent = Math.round(p * 100) + '%';
+    });
+
+    eqGo.addEventListener('click', () => renderEquation(true));
+    eqInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); renderEquation(true); } });
+    let eqDebounce = null;
+    eqInput.addEventListener('input', () => { clearTimeout(eqDebounce); eqDebounce = setTimeout(() => renderEquation(true), 350); });
+    eqChips.addEventListener('click', (e) => {
+      const b = e.target.closest('.chip');
