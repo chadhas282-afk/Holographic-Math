@@ -2978,3 +2978,13 @@
       };
       mediaRecorder.start();
       exportWebmBtn.textContent = 'Stop';
+      exportWebmBtn.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const tag = e.target && e.target.tagName;
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+      const n = parseInt(e.key, 10);
+      if (n === 5) renderEquation(true);
+      else if (n >= 1 && n <= 4) switchShape(n - 1);
+    });
