@@ -3058,3 +3058,13 @@
       }
       lastTouchTime = now; lastTouchX = touch.clientX; lastTouchY = touch.clientY;
       onPtrUp();
+      });
+    renderer.domElement.addEventListener('pointerdown', onPtrDown);
+    renderer.domElement.addEventListener('pointermove', onPtrMove);
+    window.addEventListener('pointerup', onPtrUp);
+    window.addEventListener('pointercancel', onPtrUp);
+    const clock = new THREE.Clock();
+    let lastLiveSent = 0, lastLiveSent2 = 0;
+
+    function evaluateLive() {
+      const now = clock.elapsedTime;
