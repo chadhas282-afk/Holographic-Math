@@ -3088,3 +3088,13 @@
         clearTimeout(multiTimer);
         multiTimer = setTimeout(() => {
           if (!multiParts) return;
+          multiIdx = (multiIdx + 1) % multiParts.length;
+          startExpr(multiParts[multiIdx], true, 'multi [' + (multiIdx + 1) + '/' + multiParts.length + ']');
+        }, 1200);
+      } else if (playLoop && playlist.length > 1) {
+        playIndex = (playIndex + 1) % playlist.length;
+        switchShape(playlist[playIndex]);
+      }
+    }
+
+    function animate() {
