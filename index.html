@@ -2988,3 +2988,13 @@
       if (n === 5) renderEquation(true);
       else if (n >= 1 && n <= 4) switchShape(n - 1);
     });
+
+    let panelCollapsed = false;
+    collapseBtn.addEventListener('click', () => {
+      panelCollapsed = !panelCollapsed;
+      panelBody.hidden = panelCollapsed;
+      collapseBtn.innerHTML = panelCollapsed ? '+' : '&#8722;';
+    });
+
+    let frames = 0, lastFpsT = performance.now();
+    let qualityCooldown = 4000;
