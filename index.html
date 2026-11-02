@@ -3018,3 +3018,13 @@
         (chans[1].busy ? 'eval… ' : '') + 'eval ' + chans[1].ms.toFixed(0) + 'ms' +
         (layerOn ? ' · e2 ' + chans[2].ms.toFixed(0) + 'ms' : '') +
         (playLoop && playlist.length ? ' · Q' + playlist.length : '');
+        }
+
+    const raycaster = new THREE.Raycaster();
+    const attractPlane = new THREE.Plane();
+    const attractPoint = new THREE.Vector3();
+    const _ndc = new THREE.Vector2(), _camDir = new THREE.Vector3(), _local = new THREE.Vector3();
+    let targetActive = 0, mouseActive = 0, _lastMouseX = 0, _lastMouseY = 0;
+
+    function intersectMouse(clientX, clientY) {
+      const r = renderer.domElement.getBoundingClientRect();
