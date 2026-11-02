@@ -3008,3 +3008,13 @@
       frames = 0; lastFpsT = now;
       if (document.hidden) return;
       if (fps < 40 && !lodHidden) { lodHidden = true; glintsMesh.visible = false; starGroup.visible = false; }
+      else if (fps >= 45 && lodHidden) { lodHidden = false; glintsMesh.visible = glintsOn; starGroup.visible = true; }
+      if (qualityCooldown <= 0) {
+        if (fps < 30 && geomN > 15000) { setCount(Math.max(15000, Math.round(geomN * 0.7))); qualityCooldown = 3000; }
+        else if (fps > 55 && geomN < targetCount()) { setCount(Math.min(targetCount(), Math.round(geomN * 1.12))); qualityCooldown = 3000; }
+      } else qualityCooldown -= el;
+      fpsEl.textContent =
+        fps + ' fps\n' + fmtK(geomN) + ' pts' + (geomN !== targetCount() ? ' (auto)' : '') + ' · ' +
+        (chans[1].busy ? 'eval… ' : '') + 'eval ' + chans[1].ms.toFixed(0) + 'ms' +
+        (layerOn ? ' · e2 ' + chans[2].ms.toFixed(0) + 'ms' : '') +
+        (playLoop && playlist.length ? ' · Q' + playlist.length : '');
