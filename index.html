@@ -3128,3 +3128,13 @@
       filmPass.uniforms.uTime.value = t;
       sdfVolumeShader.uniforms.uTime.value = t;
       updateSdfVolume(dt);
+      updateSpatialLod();
+
+      if (dofFocusOn && dofOn && targetActive < 0.5) {
+        const hit = intersectMouse(_lastMouseX, _lastMouseY);
+        if (hit) bokehPass.uniforms.focus.value = camera.position.distanceTo(hit);
+      }
+
+      mouseActive += (targetActive - mouseActive) * 0.09;
+      if (mouseActive < 0.001) mouseActive = 0;
+      u.uMouseActive.value = mouseActive;
